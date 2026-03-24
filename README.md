@@ -57,12 +57,16 @@ Complex commands like `/obsidian-save` and `/obsidian-health` spawn parallel sub
 
 ### Option A — Install into existing Claude setup
 
-1. Clone this repo into your Claude skills directory:
+1. Clone and run the installer:
 ```bash
 git clone https://github.com/eugeniughelbur/obsidian-second-brain ~/.claude/skills/obsidian-second-brain
+cd ~/.claude/skills/obsidian-second-brain
+bash install.sh
 ```
 
-2. Make sure the [obsidian-vault MCP server](https://github.com/calclavia/mcp-obsidian) is configured in your Claude config:
+This copies all 14 slash commands to `~/.claude/commands/` and links the skill into `~/.claude/skills/`. Restart Claude Code when done.
+
+2. Add the MCP server so Claude can read and write your vault:
 
 **Claude Desktop** (`~/Library/Application Support/Claude/claude_desktop_config.json`):
 ```json
@@ -76,24 +80,17 @@ git clone https://github.com/eugeniughelbur/obsidian-second-brain ~/.claude/skil
 }
 ```
 
-**Claude Code** (`~/.claude/settings.json`):
-```json
-{
-  "mcpServers": {
-    "obsidian-vault": {
-      "command": "npx",
-      "args": ["-y", "mcp-obsidian", "/path/to/your/vault"]
-    }
-  }
-}
+**Claude Code:**
+```bash
+claude mcp add -s user obsidian-vault -- npx -y mcp-obsidian "/path/to/your/vault"
 ```
 
-3. Drop a `_CLAUDE.md` into your vault:
+3. Generate your vault's operating manual:
 ```
 /obsidian-init
 ```
 
-Claude will scan your vault structure, read your templates, and generate a customized operating manual.
+Claude will scan your vault structure, read your templates, and generate a customized `_CLAUDE.md`.
 
 ### Option B — Bootstrap a new vault
 
