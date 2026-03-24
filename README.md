@@ -45,6 +45,12 @@ Scan any vault for duplicates, orphaned notes, stale tasks, broken links, missin
 ### ⌨️ Slash commands
 14 built-in commands for every common vault operation — all smart, all context-aware.
 
+### 🤖 Autonomous scheduled agents
+4 agents that run on a schedule with no user intervention: morning briefing, nightly close-out, weekly review, and Sunday health check.
+
+### ⚡ Parallel subagents
+Complex commands like `/obsidian-save` and `/obsidian-health` spawn parallel subagents internally — one per note type or check category — so large operations complete faster and more thoroughly.
+
 ---
 
 ## Quick Start
@@ -161,6 +167,31 @@ Update it when your priorities shift or your structure changes:
 | `/obsidian-init` | Discovers your vault structure and generates a `_CLAUDE.md` operating manual |
 
 **Name matching:** All commands that take a name argument handle typos and partial matches — Claude searches the vault, shows what it found, and confirms before acting.
+
+---
+
+## Scheduled Agents
+
+Four agents that run autonomously on a schedule — no user action required. Set them up once with `/schedule` in Claude Code.
+
+| Agent | Schedule | What it does |
+|---|---|---|
+| `obsidian-morning` | Daily 8:00 AM | Creates today's daily note, surfaces overdue tasks and stale projects |
+| `obsidian-nightly` | Daily 10:00 PM | Closes out the day, appends an End of Day summary, moves completed tasks to Done |
+| `obsidian-weekly` | Fridays 6:00 PM | Generates a weekly review note from the week's daily notes and completed tasks |
+| `obsidian-health-check` | Sundays 9:00 PM | Runs the vault health check and saves a report — never auto-fixes, only reports |
+
+To set them up:
+```
+/schedule
+```
+
+Then tell Claude which agents you want and at what times.
+
+```
+/schedule list           # see active scheduled agents
+/schedule remove name    # remove one
+```
 
 ---
 

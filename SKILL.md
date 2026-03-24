@@ -189,11 +189,15 @@ These slash commands can be used in any Claude surface. Each one is smart — it
 
 Steps:
 1. Scan the conversation and identify all vault-worthy items: decisions, tasks, people mentioned, projects started, ideas, learnings, deals, mentions/shoutouts
-2. For each item, determine the correct note type and target folder
-3. Search for existing notes before creating anything new — merge/update where possible
-4. Write or update each note with correct frontmatter
-5. Propagate: update boards, daily note, linked people/project notes
-6. Report back: a clean list of what was saved and where
+2. Group items by type: people, projects, tasks, decisions, ideas, deals
+3. Spawn parallel subagents — one per group — so all note types are handled simultaneously:
+   - **People agent**: search for each person, create or update notes, log interactions
+   - **Projects agent**: search for each project, create or update notes
+   - **Tasks agent**: parse tasks, add to the right kanban columns
+   - **Decisions agent**: find relevant project notes, append to Key Decisions sections
+   - **Ideas agent**: search Ideas/ for related notes, create or append
+4. After all agents complete: update today's daily note with links to everything saved
+5. Report back: a clean list of what was saved and where
 
 Do not ask for guidance on where to save things — infer it. Only ask if something is genuinely ambiguous (e.g. a person mentioned with no context on who they are).
 
@@ -304,10 +308,11 @@ Do not just return filenames — return enough context for the user to act.
 
 Steps:
 1. Determine the date range from the argument (default: `week` if not specified)
-2. Read all daily notes in that range using `list_files_in_dir("Daily/")` + `get_file_contents(path)` for each
-3. Also read any dev logs, completed tasks, and project updates from that period
-4. Synthesize: what was worked on, decisions made, people interacted with, tasks completed, ideas captured
-5. Present as a clean narrative summary — not a raw dump of note content
+2. List all daily notes in the range with `list_files_in_dir("Daily/")`
+3. Spawn parallel subagents — one per daily note — to read and extract key points from each simultaneously
+4. Also spawn parallel agents to read dev logs and completed kanban tasks from the same period
+5. Synthesize all agent results: what was worked on, decisions made, people interacted with, tasks completed, ideas captured
+6. Present as a clean narrative summary — not a raw dump of note content
 
 ---
 
@@ -365,14 +370,20 @@ Steps:
 
 Steps:
 1. Run: `python scripts/vault_health.py --path ~/path/to/vault --json`
-2. Parse the JSON output
-3. Group findings by severity:
-   - 🔴 Critical: unfilled template syntax, broken links
+2. Parse the JSON output and split findings into categories
+3. Spawn parallel subagents to handle each category simultaneously:
+   - **Links agent**: verify broken links, attempt to resolve them
+   - **Duplicates agent**: confirm duplicates are truly the same concept, not just similar names
+   - **Frontmatter agent**: identify notes missing required fields by type
+   - **Staleness agent**: check overdue tasks and unfilled template syntax
+   - **Orphans agent**: check orphaned notes and empty folders
+4. Merge agent results and group by severity:
+   - 🔴 Critical: broken links, unfilled template syntax
    - 🟡 Warning: duplicates, stale tasks, missing frontmatter
    - ⚪ Info: orphaned notes, empty folders
-4. Present a clean summary with counts per category
-5. For safe fixes (missing frontmatter, obvious duplicates), offer to fix them automatically
-6. For destructive fixes (archiving, merging), list them and ask for explicit confirmation before touching anything
+5. Present a clean summary with counts per category
+6. For safe fixes (missing frontmatter, obvious duplicates), offer to fix them automatically
+7. For destructive fixes (archiving, merging), list them and ask for explicit confirmation before touching anything
 
 ---
 
@@ -382,15 +393,123 @@ Steps:
 
 Steps:
 1. Call `list_files_in_vault()` to map the full structure
-2. Read `Home.md` or equivalent dashboard if it exists
-3. Read 2–3 templates from `Templates/`
-4. Read each kanban board in `Boards/`
-5. Read a sample of existing notes (one per major folder) to understand naming conventions and frontmatter patterns
-6. Generate a complete `_CLAUDE.md` using the template in `references/claude-md-template.md`, filled with real values from the vault
-7. Write it to `_CLAUDE.md` at the vault root via `append_content("_CLAUDE.md", content)`
-8. Confirm what was written and tell the user to restart their Claude session so the new file takes effect
+2. Spawn parallel subagents to discover vault context simultaneously:
+   - **Dashboard agent**: read `Home.md` or equivalent dashboard
+   - **Templates agent**: read all files in `Templates/`
+   - **Boards agent**: read all files in `Boards/`
+   - **Samples agent**: read one existing note per major folder to capture naming conventions and frontmatter patterns
+3. Merge all agent results into a complete picture of the vault
+4. Generate a complete `_CLAUDE.md` using the template in `references/claude-md-template.md`, filled with real values from the vault
+5. Write it to `_CLAUDE.md` at the vault root via `append_content("_CLAUDE.md", content)`
+6. Confirm what was written and tell the user to restart their Claude session so the new file takes effect
 
 If `_CLAUDE.md` already exists: show a diff of what would change and ask before overwriting.
+
+---
+
+## Scheduled Agents
+
+Four autonomous agents designed to run on a schedule with no user intervention. Each runs a focused vault operation at a set time, then stops. They are conservative by default — they never delete or archive anything autonomously, and they never ask the user questions mid-run.
+
+Set these up once using the `/schedule` skill in Claude Code.
+
+---
+
+### `obsidian-morning` — Daily at 8:00 AM
+
+**Creates today's daily note and surfaces what needs attention.**
+
+Prompt to schedule:
+```
+Read _CLAUDE.md. Create today's daily note in Daily/ using the Daily Note template.
+Pull in any tasks from kanban boards that are due today or overdue.
+List any projects with status active that have no recent activity in the last 7 days.
+Do not ask questions — infer everything from the vault. Save and stop.
+```
+
+Setup:
+```
+/schedule obsidian-morning — daily 8:00 AM
+```
+
+---
+
+### `obsidian-nightly` — Daily at 10:00 PM
+
+**Closes out the day — saves anything unsaved, updates the daily note.**
+
+Prompt to schedule:
+```
+Read _CLAUDE.md. Read today's daily note in Daily/.
+Scan the current session context for anything worth saving that hasn't been logged yet:
+decisions, tasks completed, people mentioned, ideas discussed.
+Append a ## End of Day section to today's daily note with a 3-5 bullet summary of the day.
+Move any completed kanban tasks to the Done column if not already done.
+Do not ask questions. Save and stop.
+```
+
+Setup:
+```
+/schedule obsidian-nightly — daily 10:00 PM
+```
+
+---
+
+### `obsidian-weekly` — Every Friday at 6:00 PM
+
+**Generates a weekly review note from the vault.**
+
+Prompt to schedule:
+```
+Read _CLAUDE.md. Run /obsidian-recap week to gather this week's activity.
+Generate a weekly review note using the Review template (or standard structure if none exists).
+Save to Reviews/YYYY-MM-DD — Weekly Review.md.
+Link it from this week's last daily note.
+Do not ask questions. Save and stop.
+```
+
+Setup:
+```
+/schedule obsidian-weekly — every Friday 6:00 PM
+```
+
+---
+
+### `obsidian-health-check` — Every Sunday at 9:00 PM
+
+**Runs the vault health check and logs a report.**
+
+Prompt to schedule:
+```
+Read _CLAUDE.md. Run: python scripts/vault_health.py --path ~/path/to/vault --json
+Parse the output. Write a health report to Knowledge/Vault Health YYYY-MM-DD.md
+summarizing findings by severity (critical, warning, info).
+Do not fix anything autonomously — only report.
+Do not ask questions. Save and stop.
+```
+
+Setup:
+```
+/schedule obsidian-health-check — every Sunday 9:00 PM
+```
+
+---
+
+### Setting up scheduled agents
+
+All four can be configured at once:
+
+```
+/schedule
+```
+
+Then tell Claude which agents you want and at what times. Claude Code's scheduling system will handle the rest — agents run autonomously in the background on the defined cron schedule.
+
+To list or remove scheduled agents:
+```
+/schedule list
+/schedule remove obsidian-morning
+```
 
 ---
 
