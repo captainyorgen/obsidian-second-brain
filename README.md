@@ -17,8 +17,32 @@
   <a href="#the-three-layers">Features</a> &middot;
   <a href="#commands-at-a-glance">Commands</a> &middot;
   <a href="#scheduled-agents--claude-works-while-you-sleep">Agents</a> &middot;
-  <a href="#contributing">Contributing</a>
+  <a href="#contributing">Contributing</a> &middot;
+  <a href="https://github.com/eugeniughelbur/obsidian-second-brain/discussions">Discussions</a>
 </p>
+
+<!-- 
+  TODO: Add a demo GIF here for maximum impact.
+  Record a 30-second screen capture of /obsidian-save or /obsidian-challenge in action.
+  Tools: CleanShot X, Kap, or OBS. Upload to the repo and uncomment below.
+  
+  <p align="center">
+    <img src="assets/demo.gif" alt="Demo" width="800" />
+  </p>
+-->
+
+---
+
+## Who Is This For?
+
+| You are... | This skill gives you... |
+|---|---|
+| **A founder or operator** | A personal chief of staff that remembers every decision, tracks every project, and challenges your thinking with your own history |
+| **A developer** | Automatic dev logs, session continuity, and a vault that links code decisions to project notes without you lifting a finger |
+| **A knowledge worker** | Zero-friction capture from every conversation, weekly reviews that write themselves, and a vault that never has orphaned notes |
+| **Anyone who uses Claude daily** | Persistent memory across sessions, so you never re-explain who you are or what you're working on |
+
+If you take notes in Obsidian and use Claude, this skill is the bridge between the two.
 
 ---
 
@@ -37,6 +61,20 @@ This skill solves both problems at once. Your vault becomes Claude's memory, and
 > **You write. Claude thinks.** Your notes become fuel for insight. Claude red-teams your plans, finds unnamed patterns, and connects ideas across domains you'd never link yourself.
 >
 > **You sleep. Claude maintains.** Scheduled agents run morning, night, and weekly — autonomously. A background agent fires after every compaction and silently updates your vault while you keep working.
+
+---
+
+## How It Compares
+
+| | Doing it manually | Generic AI chat | **obsidian-second-brain** |
+|---|---|---|---|
+| Saving decisions from conversations | Copy-paste into notes yourself | Lost when chat ends | Auto-saved to the right project note |
+| Keeping daily notes current | Write it yourself, forget half the time | N/A | Created and updated automatically |
+| Finding patterns across weeks | Re-read dozens of notes | Hallucinated patterns | `/obsidian-emerge` — grounded in your actual notes |
+| Challenging your own assumptions | Hope someone pushes back | AI agrees with everything | `/obsidian-challenge` — uses your own vault history against you |
+| Session continuity | Re-explain everything each time | Memory is unreliable | `/obsidian-world` — full context in one command |
+| Vault maintenance | Manual weekly cleanup | N/A | Background agent + scheduled health checks |
+| Cross-domain idea generation | Rare flashes of insight | Generic brainstorming | `/obsidian-connect` — traces your vault's link graph |
 
 ---
 
