@@ -11,7 +11,7 @@
 <p align="center">
   <strong>Turn your Obsidian vault into a personal AI operating system.</strong>
   <br />
-  <em>20 commands &middot; 4 thinking tools &middot; 4 scheduled agents &middot; 1 background agent</em>
+  <em>21 commands &middot; 4 thinking tools &middot; 4 scheduled agents &middot; 1 background agent</em>
   <br /><br />
   <a href="#install">Install</a> &middot;
   <a href="#the-three-layers">Features</a> &middot;
@@ -130,7 +130,8 @@ This skill solves both problems at once. Your vault becomes Claude's memory, and
 | `/obsidian-review` | Generates a structured weekly or monthly review |
 | `/obsidian-board [name]` | Shows kanban state, flags overdue items |
 | `/obsidian-project [name]` | Creates or updates a project note with board and daily links |
-| `/obsidian-health` | Vault audit — duplicates, orphans, broken links, stale tasks |
+| `/obsidian-health` | Vault audit — duplicates, orphans, broken links, contradictions, concept gaps, stale claims |
+| `/obsidian-adr` | Generate a decision record when vault structure changes — the vault knows why it's organized this way |
 | `/obsidian-init` | Scans your vault and generates `_CLAUDE.md`, `index.md`, and `log.md` |
 | `/obsidian-ingest` | Ingests a source (article, PDF, transcript, video) — one source touches 5-15 vault pages |
 
@@ -196,7 +197,7 @@ The idea note gets tagged `graduated` and linked to the new project. Nothing die
 
 | Command | What it does |
 |---|---|
-| `/obsidian-world` | Loads your identity, values, priorities, and current state in one shot |
+| `/obsidian-world` | Loads identity, values, priorities, and state with progressive token budgets (L0-L3) |
 
 Run `/obsidian-world` at the start of any session. Claude reads your `SOUL.md`, checks your last 3 daily notes, scans your boards, and reports:
 
@@ -240,7 +241,7 @@ Complex commands spawn parallel subagents — one per task group — and merge r
 | `/obsidian-save` | People + Projects + Tasks + Decisions + Ideas |
 | `/obsidian-challenge` | Decisions + Failures + Contradictions |
 | `/obsidian-emerge` | Daily notes + Dev logs + Decisions + Ideas |
-| `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans |
+| `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans + Contradictions + Concept Gaps + Stale Claims |
 | `/obsidian-recap` | One agent per daily note in the range |
 | `/obsidian-init` | Dashboard + Templates + Boards + Samples |
 | `/obsidian-ingest` | People + Projects + Ideas + Knowledge |

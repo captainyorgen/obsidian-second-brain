@@ -1,5 +1,5 @@
 ---
-description: Run a vault health check — grouped by severity, offers to fix safe issues
+description: Run a vault health check — grouped by severity, detects contradictions, concept gaps, stale claims, and structural issues
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-health`:
@@ -14,9 +14,13 @@ Use the obsidian-second-brain skill. Execute `/obsidian-health`:
    - **Frontmatter agent**: identify notes missing required fields by type
    - **Staleness agent**: check overdue tasks and unfilled template syntax
    - **Orphans agent**: check orphaned notes and empty folders
+   - **Contradictions agent**: scan Key Decisions sections and Knowledge/ notes for claims that conflict with each other or have been superseded by newer sources
+   - **Concept gaps agent**: find terms mentioned 3+ times across different notes that lack a dedicated page — these are missing concepts the vault should have
+   - **Stale claims agent**: compare Knowledge/ notes against their source dates — flag any note older than 6 months that references fast-moving topics (tools, APIs, pricing, team structure)
 5. Merge results and group by severity:
-   - 🔴 Critical: broken links, unfilled template syntax
-   - 🟡 Warning: duplicates, stale tasks, missing frontmatter
+   - 🔴 Critical: broken links, unfilled template syntax, contradictions between notes
+   - 🟡 Warning: duplicates, stale tasks, missing frontmatter, stale claims, concept gaps
    - ⚪ Info: orphaned notes, empty folders
-6. For safe fixes (missing frontmatter, obvious duplicates), offer to fix automatically
-7. For destructive fixes (archiving, merging), list them and ask for explicit confirmation first
+6. For safe fixes (missing frontmatter, obvious duplicates, creating pages for concept gaps), offer to fix automatically
+7. For destructive fixes (archiving, merging, resolving contradictions), list them and ask for explicit confirmation first
+8. Append to `log.md`: `## [YYYY-MM-DD] health | X critical, Y warnings, Z info`

@@ -394,13 +394,17 @@ Steps:
    - **Frontmatter agent**: identify notes missing required fields by type
    - **Staleness agent**: check overdue tasks and unfilled template syntax
    - **Orphans agent**: check orphaned notes and empty folders
+   - **Contradictions agent**: scan Key Decisions and Knowledge/ for claims that conflict or are superseded
+   - **Concept gaps agent**: find terms mentioned 3+ times without a dedicated page
+   - **Stale claims agent**: flag Knowledge/ notes older than 6 months on fast-moving topics
 4. Merge agent results and group by severity:
-   - 🔴 Critical: broken links, unfilled template syntax
-   - 🟡 Warning: duplicates, stale tasks, missing frontmatter
+   - 🔴 Critical: broken links, unfilled template syntax, contradictions
+   - 🟡 Warning: duplicates, stale tasks, missing frontmatter, stale claims, concept gaps
    - ⚪ Info: orphaned notes, empty folders
 5. Present a clean summary with counts per category
-6. For safe fixes (missing frontmatter, obvious duplicates), offer to fix them automatically
-7. For destructive fixes (archiving, merging), list them and ask for explicit confirmation before touching anything
+6. For safe fixes (missing frontmatter, obvious duplicates, creating pages for concept gaps), offer to fix them automatically
+7. For destructive fixes (archiving, merging, resolving contradictions), list them and ask for explicit confirmation before touching anything
+8. Append to `log.md` with severity counts
 
 ---
 
@@ -549,30 +553,50 @@ The idea doesn't die — it evolves. The original note stays as the origin story
 
 ### `/obsidian-world`
 
-**Loads your identity, values, priorities, and current state in one shot.**
+**Loads your identity, values, priorities, and current state in one shot — with progressive context levels.**
+
+Uses token budgets to avoid loading the entire vault. Start light, go deeper only as needed.
 
 Steps:
-1. Load the identity layer (read if they exist):
-   - `SOUL.md` or `About Me.md` — who the user is, communication style, thinking preferences
-   - `CORE_VALUES.md` or `Values.md` — decision-making principles and non-negotiables
-   - `Home.md` or `Dashboard.md` — current top-level priorities
-2. Load the current state:
-   - Today's daily note and the last 3 daily notes for momentum and open threads
-   - Active kanban boards for in-progress and overdue items
-   - Previous session digests (look for "End of Day" or "Session Digest" sections)
-3. Load the context:
-   - Active project notes (status: active) for current goals and blockers
-   - Key people interacted with recently (last 7 days)
-4. Present a brief status:
-   - **Who I am to you**: persona and communication style
-   - **Your current priorities**: top 3-5 active threads
-   - **Open threads from last session**: anything unfinished
-   - **Overdue / needs attention**: stale tasks or projects
-   - **Today so far**: what's already logged
+1. **L0 — Identity (~200 tokens)**: read `SOUL.md`/`About Me.md` and `CORE_VALUES.md`/`Values.md`
+2. **L1 — Navigation (~1-2K tokens)**: read `index.md` (vault catalog) and `log.md` (last 10 entries)
+3. **L2 — Current State (~2-5K tokens)**: read `Home.md`/`Dashboard.md`, today's daily note, last 3 daily notes, active kanban boards, previous session digests
+4. **L3 — Deep Context (on demand, ~5-20K tokens)**: only load if needed — active project notes, full Knowledge/ articles, recently mentioned people
+
+Present a brief status after L0-L2 (do NOT load L3 unless needed):
+- **Who I am to you**: persona and communication style
+- **Your current priorities**: top 3-5 active threads (from index.md + boards)
+- **Open threads from last session**: anything unfinished (from log.md + daily notes)
+- **Overdue / needs attention**: stale tasks or projects
+- **Today so far**: what's already logged
 
 Keep output concise — this is a boot-up sequence, not a report.
 
 If identity files don't exist, offer to create them by asking 5-7 quick questions about the user's role, values, and preferences.
+If `index.md` doesn't exist, offer to run `/obsidian-init` to generate it.
+
+---
+
+### `/obsidian-adr`
+
+**Generates a decision record when the vault structure changes.**
+
+Steps:
+1. Identify the structural decision from the argument or conversation context
+2. Create `Knowledge/ADR-YYYY-MM-DD — Title.md` with:
+   - **Decision**: one-line summary
+   - **Context**: what prompted this
+   - **Options Considered**: 2-3 alternatives evaluated
+   - **Rationale**: why this option won
+   - **Consequences**: what changed — notes created, moved, or restructured
+   - **Related**: links to affected notes
+3. Update the relevant project note's Key Decisions section with a link to the ADR
+4. Update `index.md` and append to `log.md`
+5. Link from today's daily note
+
+The vault knows why it's structured the way it is. When a future session asks "why?" — the ADR has the answer.
+
+Can also be triggered automatically by `/obsidian-graduate`, `/obsidian-health` structural fixes, or folder reorganizations. In those cases, offer to create an ADR — don't force it.
 
 ---
 

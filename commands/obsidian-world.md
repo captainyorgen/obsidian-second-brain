@@ -1,29 +1,44 @@
 ---
-description: Load your identity, values, priorities, and current state in one shot — Claude knows who you are instantly
+description: Load your identity, values, priorities, and current state in one shot — with progressive context levels to avoid burning tokens
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-world`:
 
 1. Read `_CLAUDE.md` first if it exists in the vault root
-2. Load the identity layer — read these files if they exist (search for them if paths differ):
+
+2. Load context progressively — start light, go deeper only as needed:
+
+   **L0 — Identity (~200 tokens)**
+   Read these files if they exist (search for them if paths differ):
    - `SOUL.md` or `About Me.md` — who the user is, communication style, thinking preferences
    - `CORE_VALUES.md` or `Values.md` — decision-making principles and non-negotiables
-   - `Home.md` or `Dashboard.md` — current top-level priorities and active projects
-3. Load the current state:
+
+   **L1 — Navigation (~1-2K tokens)**
+   - Read `index.md` — the catalog of all vault pages. This tells Claude what exists without loading everything.
+   - Read `log.md` (last 10 entries only) — what happened recently in the vault
+
+   **L2 — Current State (~2-5K tokens)**
+   - Read `Home.md` or `Dashboard.md` — current top-level priorities
    - Read today's daily note (if it exists) for what's already in progress
    - Read the last 3 daily notes for recent momentum and open threads
    - Scan active kanban boards for in-progress and overdue items
-   - Check for any session digest from the previous conversation (look for "End of Day" or "Session Digest" sections in recent daily notes)
-4. Load the context:
+   - Check for session digests from previous conversations (look for "End of Day" or "Session Digest" sections)
+
+   **L3 — Deep Context (on demand, ~5-20K tokens)**
+   - Only load if needed for a specific question or task
    - Read active project notes (status: active) for current goals and blockers
-   - Identify key people the user has interacted with recently (last 7 days of daily notes)
-5. Synthesize and present a brief status:
+   - Read full source articles from Knowledge/ if the user asks about a specific topic
+   - Identify key people interacted with recently (last 7 days of daily notes)
+
+3. Present a brief status after L0-L2 (do NOT load L3 unless needed):
    - **Who I am to you**: confirm the persona and communication style
-   - **Your current priorities**: top 3-5 active threads
-   - **Open threads from last session**: anything unfinished
+   - **Your current priorities**: top 3-5 active threads (from index.md + boards)
+   - **Open threads from last session**: anything unfinished (from log.md + daily notes)
    - **Overdue / needs attention**: tasks or projects that are stale
    - **Today so far**: what's already logged today
 
-Keep the output concise — this is a boot-up sequence, not a report. The user should be able to glance at it and say "yes, Claude is up to speed" and start working immediately.
+Keep output concise — this is a boot-up sequence, not a report. The user should glance at it and say "yes, Claude is up to speed" and start working immediately.
 
-If identity files (SOUL.md, CORE_VALUES.md) don't exist, offer to create them by interviewing the user with 5-7 quick questions about their role, values, and communication preferences.
+If identity files (SOUL.md, CORE_VALUES.md) don't exist, offer to create them by asking 5-7 quick questions about the user's role, values, and communication preferences.
+
+If `index.md` doesn't exist, offer to run `/obsidian-init` to generate it.
