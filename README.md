@@ -137,6 +137,27 @@ This skill solves both problems at once. Your vault becomes Claude's memory, and
 
 Every command searches before creating (no duplicates), propagates to every linked note (no orphans), and handles typos with fuzzy matching.
 
+<details>
+<summary><strong>See /obsidian-ingest in action</strong></summary>
+
+<br />
+
+```
+/obsidian-ingest https://youtube.com/watch?v=example
+```
+
+Claude detects it's a YouTube video, pulls full metadata and transcript (via `yt-dlp` in Claude Code, MCP tools in Claude Desktop, or oEmbed + user paste as fallback), then:
+
+1. Creates `Knowledge/2026-04-06 — Video Title.md` with full summary, timestamps, key concepts
+2. Creates or updates `People/Speaker Name.md` for everyone mentioned
+3. Creates `Ideas/New Concept.md` for any novel frameworks or ideas
+4. Updates related `Projects/` notes with new findings
+5. Updates `index.md`, `log.md`, and today's daily note
+
+**One URL in. 5-15 vault pages out.** Works with articles, PDFs, transcripts, and pasted text too.
+
+</details>
+
 ---
 
 ### Layer 2: Thinking Tools
