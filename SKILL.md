@@ -97,14 +97,37 @@ Two structural files that keep the vault navigable and auditable:
 
 - **`log.md`** — An append-only chronological log of every vault operation. Every save, ingest, health check, and structural change gets a timestamped entry. Never delete or rewrite entries — only append. Format: `## [YYYY-MM-DD] action | Description`
 
+### The vault is a living system
+The vault is not a filing cabinet. It is a living knowledge base that rewrites itself with every input. When new information enters:
+- Existing pages get REWRITTEN with new context, not just appended to
+- Contradictions between old and new claims get resolved or explicitly documented
+- New patterns across multiple sources trigger automatic synthesis pages
+- Stale claims get replaced with current information, with history preserved
+
+The vault after an ingest should be DIFFERENT — not just bigger. If pages that existed before aren't smarter, more connected, and more current, the ingest wasn't deep enough.
+
 ### Two-Output Rule
 Every interaction that produces insight must generate two outputs:
 1. **The answer** — what the user sees in the conversation
 2. **A vault update** — the insight filed back into the relevant note(s)
 
-This applies to all thinking tools (`/obsidian-challenge`, `/obsidian-emerge`, `/obsidian-connect`, `/obsidian-graduate`) and any query where Claude synthesizes information from the vault. The vault should get smarter after every interaction, not just when the user explicitly asks to save.
+This applies to all thinking tools and any query where Claude synthesizes information from the vault.
 
-If a challenge analysis reveals a contradiction, file it in the project note's Key Decisions section. If an emerge scan surfaces a pattern, save it to Ideas/. If a connect exercise produces a new concept, create a note for it. The user gets the answer AND the vault compounds.
+### Synthesis Hook
+When Claude notices a pattern during any operation (ingest, query, challenge, emerge), it should automatically create a synthesis page in `wiki/concepts/`. Patterns include:
+- The same concept appearing in 3+ unrelated sources
+- A claim being reinforced by multiple independent sources
+- A trend emerging across time-sequenced notes
+- Two entities sharing unexpected connections
+
+Synthesis pages are the vault thinking for itself — connecting dots the user hasn't connected yet.
+
+### Reconciliation
+The vault should never contain two pages that disagree without knowing they disagree. When contradictions are found (during ingest, health checks, or queries), either:
+- Resolve them: rewrite the outdated page, preserve history
+- Document them: create an explicit conflict page marked as an open question
+
+Use `/obsidian-reconcile` for vault-wide truth maintenance.
 
 ### Search before creating
 Before creating any new note, search for an existing one:
@@ -416,6 +439,26 @@ Steps:
 6. For safe fixes (missing frontmatter, obvious duplicates, creating pages for concept gaps), offer to fix them automatically
 7. For destructive fixes (archiving, merging, resolving contradictions), list them and ask for explicit confirmation before touching anything
 8. Append to `log.md` with severity counts
+
+---
+
+### `/obsidian-reconcile`
+
+**Finds and resolves contradictions across the vault.**
+
+Steps:
+1. Read `index.md` to understand the full vault landscape
+2. Spawn parallel subagents to find contradictions:
+   - **Claims agent**: scan `wiki/concepts/` and `wiki/projects/` for conflicting factual claims
+   - **Entity agent**: scan `wiki/entities/` for outdated roles, companies, or descriptions
+   - **Decisions agent**: scan `wiki/decisions/` for reversed or superseded decisions never updated
+   - **Source freshness agent**: compare `raw/` dates against `wiki/` pages for stale references
+3. For each contradiction, evaluate: which is newer, which is more authoritative, is it a genuine conflict or an evolution
+4. Resolve:
+   - **Clear winner**: rewrite the outdated page, add a History section noting what changed
+   - **Ambiguous**: create `wiki/decisions/Conflict — Topic.md` with both sides, mark `status: open`
+   - **Evolution**: update the page to current state with historical context
+5. Rebuild affected `index.md` sections, append to `log.md`, update daily note
 
 ---
 

@@ -11,7 +11,7 @@
 <p align="center">
   <strong>Turn your Obsidian vault into a personal AI operating system.</strong>
   <br />
-  <em>21 commands &middot; 4 thinking tools &middot; knowledge ingestion &middot; 4 scheduled agents &middot; 1 background agent</em>
+  <em>22 commands &middot; 4 thinking tools &middot; living knowledge base &middot; 4 scheduled agents &middot; 1 background agent</em>
   <br /><br />
   <a href="#install">Install</a> &middot;
   <a href="#the-three-layers">Features</a> &middot;
@@ -145,7 +145,8 @@ This skill connects them. Your vault becomes Claude's long-term memory. Claude b
 | `/obsidian-health` | Vault audit — duplicates, orphans, broken links, contradictions, concept gaps, stale claims |
 | `/obsidian-adr` | Generate a decision record when vault structure changes — the vault knows why it's organized this way |
 | `/obsidian-init` | Scans your vault and generates `_CLAUDE.md`, `index.md`, and `log.md` |
-| `/obsidian-ingest` | Ingests a source (article, PDF, transcript, video) — one source touches 5-15 vault pages |
+| `/obsidian-ingest` | Ingests a source — the vault REWRITES itself around new knowledge. Creates, updates, and resolves contradictions across 5-15 pages |
+| `/obsidian-reconcile` | Finds contradictions across the vault and resolves them — the vault maintains its own truth |
 
 Every command searches before creating (no duplicates), propagates to every linked note (no orphans), and handles typos with fuzzy matching.
 
@@ -160,13 +161,14 @@ Every command searches before creating (no duplicates), propagates to every link
 
 Claude detects it's a YouTube video, pulls full metadata and transcript (via `yt-dlp` in Claude Code, MCP tools in Claude Desktop, or oEmbed + user paste as fallback), then:
 
-1. Creates `Knowledge/2026-04-06 — Video Title.md` with full summary, timestamps, key concepts
-2. Creates or updates `People/Speaker Name.md` for everyone mentioned
-3. Creates `Ideas/New Concept.md` for any novel frameworks or ideas
-4. Updates related `Projects/` notes with new findings
-5. Updates `index.md`, `log.md`, and today's daily note
+1. Saves original to `raw/videos/` (immutable — never touched again)
+2. REWRITES `wiki/entities/Speaker Name.md` with new context (not just appends — integrates)
+3. REWRITES `wiki/concepts/Existing Concept.md` if the source adds depth or contradicts it
+4. Creates new concept pages if the source reveals patterns across existing knowledge
+5. Resolves contradictions: if the video says X but an existing page says Y, the vault picks the winner and documents why
+6. Rebuilds `index.md`, appends to `log.md`, updates today's daily note
 
-**One URL in. 5-15 vault pages out.** Works with articles, PDFs, transcripts, and pasted text too.
+**One URL in. The vault rewrites itself.** Pages that existed before are now smarter, more connected, and more current. Not just bigger — different.
 
 </details>
 
@@ -277,7 +279,8 @@ Complex commands spawn parallel subagents — one per task group — and merge r
 | `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans + Contradictions + Concept Gaps + Stale Claims |
 | `/obsidian-recap` | One agent per daily note in the range |
 | `/obsidian-init` | Dashboard + Templates + Boards + Samples |
-| `/obsidian-ingest` | People + Projects + Ideas + Knowledge |
+| `/obsidian-ingest` | Entities + Concepts + Projects + Contradictions |
+| `/obsidian-reconcile` | Claims + Entities + Decisions + Source Freshness |
 
 ---
 

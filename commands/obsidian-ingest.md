@@ -1,5 +1,5 @@
 ---
-description: Ingest a source (article, PDF, transcript, video) into the vault — extracts entities, creates/updates multiple pages, and logs the ingest
+description: Ingest a source into the vault — the vault rewrites itself around new knowledge. Every ingest updates entities, rewrites stale claims, synthesizes new concepts, and resolves contradictions.
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-ingest $ARGUMENTS`:
@@ -21,27 +21,20 @@ The argument is a URL, file path, or pasted text. If no argument, ask what to in
 
    **Method A — `yt-dlp` (best, works in Claude Code / terminal):**
    ```bash
-   # Check if installed
    which yt-dlp || brew install yt-dlp
-
-   # Pull metadata
    yt-dlp --skip-download --print title --print description --print duration_string --print view_count --print like_count --print upload_date --print channel "URL"
-
-   # Pull transcript if available
    yt-dlp --write-auto-sub --sub-lang en --skip-download -o "/tmp/%(id)s" "URL"
    ```
 
    **Method B — YouTube MCP tools (works in Claude Desktop if configured):**
-   Check if YouTube MCP tools are available (e.g., `youtube_get_video_details`). If so, use them to pull metadata and description.
+   Check if YouTube MCP tools are available. If so, use them.
 
    **Method C — oEmbed fallback (works everywhere, limited data):**
-   Fetch `https://www.youtube.com/oembed?url=URL&format=json` — gives title and channel only. Then ask user: "I got the title and channel but YouTube blocks full descriptions. Paste the video description here for a complete ingest."
+   Fetch `https://www.youtube.com/oembed?url=URL&format=json` — gives title and channel only. Ask user to paste description for full ingest.
 
    **For articles** — use WebFetch to pull the page content
    **For PDFs** — read the file directly
    **For pasted text** — use as-is
-
-   Always be transparent about what was extracted. If the ingest is partial, say so and tell the user what to paste for a full ingest.
 
 4. Extract and organize:
    - **Entities**: people mentioned, companies, tools, projects
@@ -50,22 +43,49 @@ The argument is a URL, file path, or pasted text. If no argument, ask what to in
    - **Action items**: anything actionable for the user
    - **Quotes**: notable quotes worth preserving
 
-5. Save the raw source:
-   - Create `Knowledge/YYYY-MM-DD — Source Title.md` with full summary and source link
-   - Frontmatter: `date`, `tags: [source, <type>]`, `source_url`, `source_type`
+5. Save the raw source to `raw/` (immutable — never modify after saving):
+   - Create `raw/articles/YYYY-MM-DD — Source Title.md` (or transcripts/, pdfs/, videos/)
+   - Frontmatter: `date`, `tags: [source, <type>]`, `source_url`, `source_type`, `content_hash`
 
-6. Spawn parallel subagents to update the vault from the source:
-   - **People agent**: for each person mentioned, search People/ — create or update with new context
-   - **Projects agent**: if the source relates to existing projects, update those notes with new findings
-   - **Ideas agent**: for new concepts or ideas, search Ideas/ — create or append
-   - **Knowledge agent**: for factual claims or frameworks, create or update Knowledge/ notes
+6. **REWRITE the vault** — this is the critical step. Don't just create new pages. Rewrite existing ones.
+
+   Read `index.md` first to understand what already exists in the vault. Then spawn parallel subagents:
+
+   - **Entities agent**: for each person/company/tool mentioned:
+     - Search `wiki/entities/` for existing page
+     - If found: REWRITE the page — merge new info with old, update role/context/interactions, add new links. Don't just append — integrate.
+     - If not found: create new entity page with full context
+   
+   - **Concepts agent**: for each idea/framework/methodology:
+     - Search `wiki/concepts/` for existing or related pages
+     - If found: REWRITE — update the concept with new evidence, new examples, new connections. If the new source adds depth, rewrite the whole section.
+     - If not found: create new concept page
+     - If the ingest reveals a PATTERN across multiple existing concepts: create a new synthesis page that connects them (e.g., "Three sources now mention X — this is a trend, not a one-off")
+   
+   - **Projects agent**: for each project referenced:
+     - Search `wiki/projects/` for matching project
+     - If found: update with new findings, add to Recent Activity, update Key Decisions if the source contains relevant decisions
+   
+   - **Contradictions agent**: for each claim in the new source:
+     - Search the vault for CONFLICTING claims in existing pages
+     - If contradiction found: UPDATE the existing page to note the conflict, add the new evidence, and mark which claim is more recent/authoritative
+     - If the new source SUPERSEDES old info: rewrite the old page with updated info and note what changed and why in the page's history section
 
 7. Update structural files:
-   - Append to `index.md` — add all newly created notes
-   - Append to `log.md` — `## [YYYY-MM-DD] ingest | Source Title (type: article/transcript/etc.) — X notes created, Y notes updated`
+   - REBUILD `index.md` — don't just append. Regenerate the sections that changed so descriptions stay current with the rewritten pages.
+   - Append to `log.md`: `## [YYYY-MM-DD] ingest | Source Title (type) — X created, Y rewritten, Z contradictions resolved`
 
-8. Update today's daily note with a summary of what was ingested
+8. Update today's daily note with:
+   - What was ingested
+   - What pages were REWRITTEN (not just created — this is the important part)
+   - Any contradictions found and how they were resolved
+   - Any new synthesis pages created from emerging patterns
 
-9. Report back: source title, type, and a list of every note created or updated
+9. Report back:
+   - Source title and type
+   - **New pages created** (list)
+   - **Existing pages rewritten** (list with what changed)
+   - **Contradictions resolved** (list with old claim vs new claim)
+   - **Synthesis pages created** (patterns that emerged from this + existing knowledge)
 
-A single ingest should touch 5-15 files. The goal is to compile knowledge once and distribute it across the vault — not just dump a summary into one note.
+The vault should be DIFFERENT after every ingest — not just bigger. Pages that existed before should be smarter, more connected, and more current. If an ingest only creates new pages and doesn't rewrite anything, it wasn't deep enough.
