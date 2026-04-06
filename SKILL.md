@@ -129,6 +129,13 @@ The vault should never contain two pages that disagree without knowing they disa
 
 Use `/obsidian-reconcile` for vault-wide truth maintenance.
 
+### Proactive save reminders
+Unsaved conversations are lost knowledge. Claude should proactively remind the user to save:
+- After 10+ exchanges: suggest "Want me to run /obsidian-save before we continue?"
+- When the user signals wrap-up (e.g., "ok", "thanks", "done", "bye", "that's it"): suggest "Before you go — want me to /obsidian-save this conversation?"
+- When a logical work block completes (feature shipped, decision made, problem solved): suggest saving
+- Never skip the reminder. This is especially critical on Claude Desktop where there's no background agent.
+
 ### Search before creating
 Before creating any new note, search for an existing one:
 ```
