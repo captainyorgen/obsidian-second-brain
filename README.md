@@ -9,80 +9,66 @@
 <h1 align="center">obsidian-second-brain</h1>
 
 <p align="center">
-  <strong>Turn your Obsidian vault into a personal AI operating system.</strong>
+  <strong>Your Obsidian vault is dead weight. This skill makes it alive.</strong>
   <br />
-  <em>22 commands &middot; 4 thinking tools &middot; living knowledge base &middot; 4 scheduled agents &middot; 1 background agent</em>
+  <em>22 commands &middot; 4 thinking tools &middot; self-rewriting knowledge base &middot; 4 scheduled agents</em>
   <br /><br />
-  <a href="#install">Install</a> &middot;
-  <a href="#the-three-layers">Features</a> &middot;
-  <a href="#commands-at-a-glance">Commands</a> &middot;
-  <a href="#scheduled-agents--claude-works-while-you-sleep">Agents</a> &middot;
-  <a href="#contributing">Contributing</a> &middot;
+  <a href="#what-happens-when-you-install-this">See it in action</a> &middot;
+  <a href="#the-three-layers">Architecture</a> &middot;
+  <a href="#commands-at-a-glance">All 22 commands</a> &middot;
+  <a href="#install">Install in 2 minutes</a> &middot;
   <a href="https://github.com/eugeniughelbur/obsidian-second-brain/discussions">Discussions</a>
 </p>
 
-<!-- 
-  TODO: Add a demo GIF here for maximum impact.
-  Record a 30-second screen capture of /obsidian-save or /obsidian-challenge in action.
-  Tools: CleanShot X, Kap, or OBS. Upload to the repo and uncomment below.
-  
-  <p align="center">
-    <img src="assets/demo.gif" alt="Demo" width="800" />
-  </p>
--->
+---
+
+## The Problem Nobody Talks About
+
+You use Claude every day. But every session starts from scratch. You re-explain your project, your role, your preferences. The conversation ends. Everything disappears.
+
+You take notes in Obsidian. Hundreds of markdown files. But they just sit there. You make the same decision twice because you forgot you made it six months ago. Ideas rot in daily notes. Patterns repeat across projects because nobody connects the dots.
+
+Two of the most powerful tools in your stack. Completely disconnected.
+
+---
+
+## What Happens When You Install This
+
+**You finish a meeting.** Type `/obsidian-save`. Claude scans the entire conversation, pulls out every decision, person, task, and idea, and saves each one to the right note. Project notes get updated. Kanban boards get new cards. Today's daily note links to everything. You did nothing.
+
+**You find a great article.** Type `/obsidian-ingest` with the URL. Claude doesn't just summarize it into one note. It REWRITES your existing pages. A person mentioned in the article? Their entity page gets updated with new context. A concept that contradicts something in your vault? Resolved. Patterns across sources? New synthesis pages created automatically. One URL in. The vault is smarter, not just bigger.
+
+**You're about to make a big decision.** Type `/obsidian-challenge`. Claude searches your own vault for past failures, contradictions, and reversed decisions on the same topic. It pushes back with your own words. Your vault holds you accountable.
+
+**You wake up Monday.** Your morning briefing is already written. The nightly agent closed out Friday. The weekly review generated itself. The health check ran Sunday and flagged two stale projects.
+
+**You haven't opened Obsidian once.** Everything happened through Claude.
 
 ---
 
 ## Who Is This For?
 
-| You are... | This skill gives you... |
+| You are... | This gives you... |
 |---|---|
-| **A founder or operator** | A personal chief of staff that remembers every decision, tracks every project, and challenges your thinking with your own history |
-| **A developer** | Automatic dev logs, session continuity, and a vault that links code decisions to project notes without you lifting a finger |
-| **A knowledge worker** | Zero-friction capture from every conversation, weekly reviews that write themselves, and a vault that never has orphaned notes |
-| **Anyone who uses Claude daily** | Persistent memory across sessions, so you never re-explain who you are or what you're working on |
-
-If you take notes in Obsidian and use Claude, this skill is the bridge between the two.
-
----
-
-## The Problem
-
-You use Claude every day. But every session starts from zero. You re-explain your project, your context, your preferences. The conversation ends and everything is lost.
-
-You take notes in Obsidian. But they sit there. Decisions get made and forgotten. You write the same lesson twice because you can't find the first one. Ideas stay in daily notes forever. Nobody connects the dots.
-
-**Two powerful tools. Zero connection between them.**
-
-## The Solution
-
-This skill connects them. Your vault becomes Claude's long-term memory. Claude becomes your vault's brain.
-
-> **You talk. Claude remembers.** Finish a conversation, type `/obsidian-save`. Every decision, person, task, and idea gets saved to the right note — automatically. You do nothing.
->
-> **You drop a link. The vault rewrites itself.** Type `/obsidian-ingest` with a YouTube video, article, or PDF. Claude doesn't just create new pages — it REWRITES existing ones. A person you already have a note on gets updated with new context. A concept that contradicts something in your vault gets resolved. Patterns across sources trigger automatic synthesis pages. One URL in, the vault is smarter — not just bigger.
->
-> **You ask. Your vault argues back.** Type `/obsidian-challenge`. Claude searches your own history for contradictions, past failures, and reversed decisions — then pushes back with your own words. This isn't generic AI. This is your vault holding you accountable.
->
-> **The vault maintains its own truth.** Type `/obsidian-reconcile`. Claude scans every page for contradictions — claims that conflict, facts that are outdated, decisions that were reversed but never updated — and resolves them. The vault never contains two pages that disagree without knowing they disagree.
->
-> **You sleep. Claude maintains.** Scheduled agents create your morning briefing, close out your day, write your weekly review, and audit your vault for rot. A background agent fires after every compaction and silently updates your vault while you keep working.
+| **A founder** | A chief of staff that remembers every decision, challenges your thinking with your own history, and never forgets a follow-up |
+| **A developer** | Auto-generated dev logs, session continuity, and a vault that links code decisions to project notes without effort |
+| **A knowledge worker** | Zero-friction capture, self-writing weekly reviews, and a vault that detects its own contradictions |
+| **Anyone using Claude daily** | Persistent memory across every session. You never re-explain who you are again. |
 
 ---
 
 ## How It Compares
 
-| | Doing it manually | Generic AI chat | **obsidian-second-brain** |
+| | Doing it manually | Generic AI chat | **This skill** |
 |---|---|---|---|
-| Saving decisions from conversations | Copy-paste into notes yourself | Lost when chat ends | Auto-saved to the right project note |
-| Keeping daily notes current | Write it yourself, forget half the time | N/A | Created and updated automatically |
-| Finding patterns across weeks | Re-read dozens of notes | Hallucinated patterns | `/obsidian-emerge` — grounded in your actual notes |
-| Challenging your own assumptions | Hope someone pushes back | AI agrees with everything | `/obsidian-challenge` — uses your own vault history against you |
-| Session continuity | Re-explain everything each time | Memory is unreliable | `/obsidian-world` — full context in one command |
-| Vault maintenance | Manual weekly cleanup | N/A | Background agent + scheduled health checks |
-| Cross-domain idea generation | Rare flashes of insight | Generic brainstorming | `/obsidian-connect` — traces your vault's link graph |
-| Ingesting external content | Read it, forget it | Summarize into 1 note | `/obsidian-ingest` — 1 source becomes 5-15 interconnected vault pages |
-| Knowing why your vault is structured this way | You don't remember | N/A | `/obsidian-adr` — decision records for every structural change |
+| Saving decisions | Copy-paste into notes | Lost when chat ends | Auto-saved to the right project note |
+| Daily notes | Write it yourself | N/A | Created and updated automatically |
+| Finding patterns | Re-read dozens of notes | Hallucinated patterns | `/emerge` -- grounded in your actual notes |
+| Challenging assumptions | Hope someone pushes back | AI agrees with everything | `/challenge` -- your own history argues against you |
+| Session continuity | Re-explain every time | Memory is unreliable | `/world` -- full context, one command |
+| Ingesting content | Read it, forget it | Summarize into 1 note | `/ingest` -- 1 source rewrites 5-15 vault pages |
+| Vault maintenance | Manual cleanup | N/A | Background agent + scheduled health checks |
+| Contradictions | You don't know they exist | N/A | `/reconcile` -- the vault resolves its own conflicts |
 
 ---
 
@@ -93,12 +79,12 @@ This skill connects them. Your vault becomes Claude's long-term memory. Claude b
   |        obsidian-second-brain             |
   +-----------------------------------------+
   |                                         |
-  |   LAYER 1: Vault Operations (16 cmds)   |
+  |   LAYER 1: Vault Operations (17 cmds)   |
   |   "Claude remembers"                    |
   |   save, daily, log, task, person,       |
   |   decide, capture, find, recap, review, |
   |   board, project, health, init,         |
-  |   ingest, adr                           |
+  |   ingest, adr, reconcile               |
   +-----------------------------------------+
   |                                         |
   |   LAYER 2: Thinking Tools (4 cmds)      |
@@ -132,23 +118,23 @@ This skill connects them. Your vault becomes Claude's long-term memory. Claude b
 
 | Command | What it does |
 |---|---|
-| `/obsidian-save` | Scans your entire conversation and saves everything worth keeping — decisions, tasks, people, ideas — all at once |
-| `/obsidian-daily` | Creates or updates today's daily note, pre-filled from conversation context |
-| `/obsidian-log` | Logs a work session — infers the project, writes the log, links it everywhere |
+| `/obsidian-save` | Scans the whole conversation and saves everything worth keeping -- decisions, tasks, people, ideas -- all at once |
+| `/obsidian-ingest` | Drop a URL, PDF, or transcript. The vault REWRITES itself -- updates entities, resolves contradictions, synthesizes patterns. 5-15 pages touched per source. |
+| `/obsidian-reconcile` | Scans the vault for contradictions and resolves them. The vault maintains its own truth. |
+| `/obsidian-daily` | Creates or updates today's daily note from conversation context |
+| `/obsidian-log` | Logs a work session -- infers the project, writes the log, links it everywhere |
 | `/obsidian-task [desc]` | Adds a task to the right kanban board with inferred priority and due date |
-| `/obsidian-person [name]` | Creates or updates a person note; logs the interaction in the daily note |
+| `/obsidian-person [name]` | Creates or updates a person note; logs the interaction |
 | `/obsidian-decide [topic]` | Extracts decisions and logs them in the right project's Key Decisions section |
-| `/obsidian-capture [idea]` | Zero-friction idea capture to Ideas/ |
-| `/obsidian-find [query]` | Smart search — returns context, not just filenames |
+| `/obsidian-capture [idea]` | Zero-friction idea capture |
+| `/obsidian-find [query]` | Smart search -- returns context, not just filenames |
 | `/obsidian-recap [period]` | Narrative summary of a day, week, or month |
 | `/obsidian-review` | Generates a structured weekly or monthly review |
 | `/obsidian-board [name]` | Shows kanban state, flags overdue items |
 | `/obsidian-project [name]` | Creates or updates a project note with board and daily links |
-| `/obsidian-health` | Vault audit — duplicates, orphans, broken links, contradictions, concept gaps, stale claims |
-| `/obsidian-adr` | Generate a decision record when vault structure changes — the vault knows why it's organized this way |
+| `/obsidian-health` | Vault audit -- broken links, contradictions, concept gaps, stale claims, duplicates, orphans |
+| `/obsidian-adr` | Decision records -- the vault knows why it's structured this way |
 | `/obsidian-init` | Scans your vault and generates `_CLAUDE.md`, `index.md`, and `log.md` |
-| `/obsidian-ingest` | Ingests a source — the vault REWRITES itself around new knowledge. Creates, updates, and resolves contradictions across 5-15 pages |
-| `/obsidian-reconcile` | Finds contradictions across the vault and resolves them — the vault maintains its own truth |
 
 Every command searches before creating (no duplicates), propagates to every linked note (no orphans), and handles typos with fuzzy matching.
 
@@ -161,16 +147,16 @@ Every command searches before creating (no duplicates), propagates to every link
 /obsidian-ingest https://youtube.com/watch?v=example
 ```
 
-Claude detects it's a YouTube video, pulls full metadata and transcript (via `yt-dlp` in Claude Code, MCP tools in Claude Desktop, or oEmbed + user paste as fallback), then:
+Claude detects it's a YouTube video, pulls the full transcript and metadata (via `yt-dlp` in Claude Code, MCP tools in Desktop, or user paste as fallback), then:
 
-1. Saves original to `raw/videos/` (immutable — never touched again)
-2. REWRITES `wiki/entities/Speaker Name.md` with new context (not just appends — integrates)
+1. Saves original to `raw/videos/` (immutable -- never touched again)
+2. REWRITES `wiki/entities/Speaker.md` with new context (integrates, not appends)
 3. REWRITES `wiki/concepts/Existing Concept.md` if the source adds depth or contradicts it
-4. Creates new concept pages if the source reveals patterns across existing knowledge
-5. Resolves contradictions: if the video says X but an existing page says Y, the vault picks the winner and documents why
+4. Creates new synthesis pages when patterns emerge across existing knowledge
+5. Resolves contradictions: video says X but vault says Y? Vault picks the winner and documents why
 6. Rebuilds `index.md`, appends to `log.md`, updates today's daily note
 
-**One URL in. The vault rewrites itself.** Pages that existed before are now smarter, more connected, and more current. Not just bigger — different.
+**One URL in. The vault rewrites itself.** Not just bigger. Different.
 
 </details>
 
@@ -178,7 +164,7 @@ Claude detects it's a YouTube video, pulls full metadata and transcript (via `yt
 
 ### Layer 2: Thinking Tools
 
-> This is what makes this skill different. These commands don't organize — they generate insight.
+> This is what makes this skill different from everything else. These commands don't organize. They generate insight you can't get on your own.
 
 | Command | What it does |
 |---|---|
@@ -192,37 +178,33 @@ Claude detects it's a YouTube video, pulls full metadata and transcript (via `yt
 
 <br />
 
-**`/obsidian-challenge`**
+**`/obsidian-challenge`** -- Your vault argues with you.
 
 You say: *"I want to rewrite the API in Rust."*
 
-Claude searches your vault, finds your 2025 post-mortem where you abandoned a Rust rewrite due to hiring constraints, and your decision log where you committed to TypeScript for 2 years. It presents the counter-evidence and asks: *"Still want to proceed?"*
-
-This is your vault arguing with you — using your own words.
+Claude finds your 2025 post-mortem where you abandoned a Rust rewrite. Finds your decision log where you committed to TypeScript for 2 years. Presents the evidence: *"Your own notes say this failed last time. Still want to proceed?"*
 
 ---
 
-**`/obsidian-emerge`**
+**`/obsidian-emerge`** -- Your vault tells you what you can't see.
 
-After a busy month, Claude scans 30 daily notes and finds you mentioned "onboarding friction" in 4 different client projects without ever naming it as a problem.
+Claude scans 30 daily notes. Finds you mentioned "onboarding friction" in 4 unrelated client projects without ever naming it as a systemic issue.
 
-It surfaces: *"You have an unnamed pattern — onboarding is your bottleneck across projects, not a one-off issue."*
-
-These are conclusions your notes already contain but you never stated.
+*"You have a pattern: onboarding is your bottleneck across projects. You never named it."*
 
 ---
 
-**`/obsidian-connect "distributed systems" "cooking"`**
+**`/obsidian-connect`** -- Your vault bridges domains.
 
-Claude traces both clusters in your link graph and finds shared concepts around preparation and load distribution. It generates 3 concrete ideas at the intersection — not vague analogies, but actionable concepts grounded in your own notes.
+`/obsidian-connect "distributed systems" "cooking"`
+
+Claude traces both clusters in your link graph. Finds shared concepts: preparation and load distribution. Generates 3 actionable ideas at the intersection -- grounded in your own notes.
 
 ---
 
-**`/obsidian-graduate`**
+**`/obsidian-graduate`** -- Your vault turns ideas into projects.
 
-An idea you captured 3 weeks ago is ready to become real. Claude reads the idea note, researches your vault for related projects and people, and generates a full project spec with goals, phases, tasks, and board entries.
-
-The idea note gets tagged `graduated` and linked to the new project. Nothing dies in your inbox.
+An idea captured 3 weeks ago is ready. Claude reads it, researches your vault for related projects and people, generates a full spec with goals, phases, tasks, and board entries. The idea note gets tagged `graduated`. Nothing dies in your inbox.
 
 </details>
 
@@ -230,40 +212,57 @@ The idea note gets tagged `graduated` and linked to the new project. Nothing die
 
 ### Layer 3: Context Engine
 
-> Every session picks up where you left off.
+> Every session picks up where the last one ended.
 
 | Command | What it does |
 |---|---|
-| `/obsidian-world` | Loads identity, values, priorities, and state with progressive token budgets (L0-L3) |
+| `/obsidian-world` | Loads your identity, values, priorities, and current state with progressive token budgets (L0-L3) |
 
-Run `/obsidian-world` at the start of any session. Claude reads your `SOUL.md`, checks your last 3 daily notes, scans your boards, and reports:
+Start any session. Run `/obsidian-world`. Claude reads your identity file, checks your last 3 daily notes, scans your boards:
 
-> *"You're focused on the API launch (due Friday), you left off debugging the auth middleware last night, and you have 2 overdue tasks on the Marketing board."*
+> *"You're focused on the API launch (due Friday). You left off debugging the auth middleware last night. 2 overdue tasks on the Marketing board."*
 
-No re-explaining. No context loss.
+No re-explaining. No memory issues. Full context in 10 seconds.
+
+---
+
+## The Vault is Alive
+
+This is what separates this skill from a note-taking plugin.
+
+Traditional vaults are filing cabinets. You put things in. They sit there. The more notes you add, the harder it gets to find anything.
+
+This vault is a living knowledge base. Every input makes it smarter:
+
+- **Ingest a source** -- existing pages get rewritten, contradictions get resolved, patterns get synthesized
+- **Save a conversation** -- every entity, concept, and decision distributes across the vault
+- **Ask a question** -- the Two-Output Rule means every answer also updates relevant pages
+- **Do nothing** -- the background agent and scheduled agents maintain the vault while you sleep
+
+The vault after a week of use is fundamentally different from the vault you started with. Not just bigger. Rewired.
 
 ---
 
 ## Background Agent
 
-The most hands-off feature. Fires automatically after every context compaction — no user action needed.
+Fires after every context compaction. No user action needed.
 
 ```
 PostCompact -> obsidian-bg-agent.sh -> claude -p (headless) -> vault updated
 ```
 
-A headless Claude subprocess wakes up, reads `_CLAUDE.md`, scans the session summary, and writes updates everywhere they belong. You keep working. The vault updates itself.
+You keep working. The vault updates itself.
 
 ---
 
-## Scheduled Agents — Claude works while you sleep
+## Scheduled Agents
 
 | Agent | When | What it does |
 |---|---|---|
-| `obsidian-morning` | Daily 8 AM | Creates today's daily note, surfaces overdue tasks and stale projects |
-| `obsidian-nightly` | Daily 10 PM | Closes out the day, appends a summary, moves completed tasks to Done |
-| `obsidian-weekly` | Fridays 6 PM | Generates a weekly review from the week's activity |
-| `obsidian-health-check` | Sundays 9 PM | Runs a vault health audit and saves a report |
+| `obsidian-morning` | Daily 8 AM | Creates daily note, surfaces overdue tasks |
+| `obsidian-nightly` | Daily 10 PM | Closes out the day, moves completed tasks |
+| `obsidian-weekly` | Fridays 6 PM | Generates weekly review |
+| `obsidian-health-check` | Sundays 9 PM | Vault health audit |
 
 Set up once: `/schedule`
 
@@ -271,70 +270,51 @@ Set up once: `/schedule`
 
 ## Parallel Subagents
 
-Complex commands spawn parallel subagents — one per task group — and merge results when all finish.
+Complex commands spawn parallel agents and merge results.
 
-| Command | What runs in parallel |
+| Command | Agents |
 |---|---|
 | `/obsidian-save` | People + Projects + Tasks + Decisions + Ideas |
-| `/obsidian-challenge` | Decisions + Failures + Contradictions |
-| `/obsidian-emerge` | Daily notes + Dev logs + Decisions + Ideas |
-| `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans + Contradictions + Concept Gaps + Stale Claims |
-| `/obsidian-recap` | One agent per daily note in the range |
-| `/obsidian-init` | Dashboard + Templates + Boards + Samples |
 | `/obsidian-ingest` | Entities + Concepts + Projects + Contradictions |
 | `/obsidian-reconcile` | Claims + Entities + Decisions + Source Freshness |
+| `/obsidian-challenge` | Decisions + Failures + Contradictions |
+| `/obsidian-emerge` | Daily notes + Dev logs + Decisions + Ideas |
+| `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans + Contradictions + Gaps + Stale Claims |
 
 ---
 
 ## Vault Architecture
 
-Two styles. Pick the one that matches how you work.
+Two styles. Choose at bootstrap.
 
-### Wiki-style (default) — for LLM-first users
+### Wiki-style (default) -- LLM-first
 
-Claude does most or all of the writing. You interact through Claude, not Obsidian. The vault is a database.
+The vault is a database. Claude is the reader and writer. You interact through Claude, not Obsidian.
 
 ```
-Your Vault/
+vault/
 +-- _CLAUDE.md        # Operating manual
 +-- index.md          # Page catalog (Claude reads FIRST)
 +-- log.md            # Activity timeline
 +-- SOUL.md           # Your identity
-|
 +-- raw/              # IMMUTABLE. Claude reads, never writes.
-|   +-- articles/     # Original source material
-|   +-- transcripts/  # Meeting notes, podcasts
-|   +-- pdfs/         # Documents
-|   +-- videos/       # YouTube metadata + transcripts
-|
+|   +-- articles/, transcripts/, pdfs/, videos/
 +-- wiki/             # Claude's workspace
-|   +-- entities/     # People, companies, tools (flat)
+|   +-- entities/     # People, companies, tools
 |   +-- concepts/     # Ideas, frameworks
-|   +-- projects/     # Project notes
-|   +-- daily/        # Daily notes
-|   +-- logs/         # Dev/work logs
-|   +-- reviews/      # Weekly/monthly reviews
-|   +-- tasks/        # Task notes
-|   +-- decisions/    # ADRs
-|
-+-- boards/           # Kanban boards
-+-- templates/        # Note templates
+|   +-- projects/, daily/, logs/, reviews/
+|   +-- tasks/, decisions/
++-- boards/, templates/
 ```
 
-`raw/` is the source of truth. Claude never touches it. If a wiki page gets corrupted, re-derive from raw. `wiki/` is Claude's workspace. Every entity, concept, and project lives here. `index.md` is the front door — Claude reads it first, navigates from there.
-
-### Obsidian-style (alternative) — for users who browse daily
+### Obsidian-style (alternative) -- for daily browsers
 
 ```
-Your Vault/
-+-- _CLAUDE.md, index.md, log.md, Home.md
+vault/
 +-- Daily/, Projects/, People/, Ideas/, Knowledge/
 +-- Dev Logs/, Tasks/, Reviews/, Boards/, Templates/
 ```
 
-Traditional folders for human spatial memory. Same commands, same features — just different folder layout.
-
-Choose at bootstrap:
 ```bash
 # Wiki-style (default)
 python bootstrap_vault.py --path ~/my-vault --name "Your Name"
@@ -347,95 +327,65 @@ python bootstrap_vault.py --path ~/my-vault --name "Your Name" --style obsidian
 
 ## Install
 
-Two commands. That's it.
+Two commands.
 
 ```bash
-# 1. Clone the skill
 git clone https://github.com/eugeniughelbur/obsidian-second-brain ~/.claude/skills/obsidian-second-brain
-
-# 2. Run setup (wires the hook, sets vault path, optionally configures MCP)
 bash ~/.claude/skills/obsidian-second-brain/scripts/setup.sh "/path/to/your/vault"
 ```
 
-Then run:
+Then: `/obsidian-init`
 
-```
-/obsidian-init
-```
-
-Claude scans your vault and generates a `_CLAUDE.md` — its operating manual for your specific vault.
+Claude scans your vault and generates `_CLAUDE.md` -- its operating manual for your specific vault.
 
 <details>
-<summary><strong>Bootstrap a new vault from scratch</strong></summary>
-
-<br />
+<summary><strong>New vault? Bootstrap from scratch.</strong></summary>
 
 ```bash
 python ~/.claude/skills/obsidian-second-brain/scripts/bootstrap_vault.py \
-  --path ~/my-vault \
-  --name "Your Name" \
-  --jobs "Company Name"
+  --path ~/my-vault --name "Your Name" --jobs "Company"
 ```
 
-Creates a complete vault with folders, templates, kanban boards, a Home dashboard, and a pre-filled `_CLAUDE.md`. Then run `setup.sh` pointing at the new path.
+Creates folders, templates, kanban boards, Home dashboard, and a ready-to-use `_CLAUDE.md`.
 
 </details>
 
 ---
 
-## Recommended Obsidian Plugins
-
-| Plugin | Why |
-|---|---|
-| [Dataview](https://github.com/blacksmithgu/obsidian-dataview) | Powers the Home dashboard queries |
-| [Templater](https://github.com/SilentVoid13/Templater) | Powers the Templates/ folder |
-| [Kanban](https://github.com/mgmeyers/obsidian-kanban) | Powers the Boards/ folder |
-| [Calendar](https://github.com/liamcain/obsidian-calendar-plugin) | Daily note navigation |
-
----
-
-## Skill Structure
-
-```
-obsidian-second-brain/
-+-- SKILL.md                        # Core instructions for Claude
-+-- commands/                       # 22 slash commands
-+-- hooks/                          # Background agent hook
-+-- references/
-|   +-- vault-schema.md             # Folder structure + frontmatter specs
-|   +-- write-rules.md              # Writing, linking, and propagation rules
-|   +-- claude-md-template.md       # Template for generating _CLAUDE.md
-+-- scripts/
-|   +-- setup.sh                    # One-command installer
-|   +-- bootstrap_vault.py          # Bootstrap a vault from scratch
-|   +-- vault_health.py             # Audit a vault for structural issues
-```
-
----
-
 ## Philosophy
 
-> Most second brain tools make you the janitor. You spend more time organizing than thinking.
+Most second brain tools make you the janitor. You spend more time organizing than thinking.
 
 This skill inverts that. You think, work, and talk. Claude handles the memory. And then it uses that memory to make you think better.
 
-Every note you write gives Claude more context. Every decision you log becomes ammunition for `/obsidian-challenge`. Every idea you capture becomes a candidate for `/obsidian-graduate`. Every source you ingest doesn't just add pages — it rewrites existing ones, resolves contradictions, and synthesizes patterns you never asked for. The vault doesn't grow. It evolves.
+Every source you ingest rewrites existing pages and synthesizes new ones. Every decision you log becomes evidence for `/challenge`. Every idea you capture becomes a candidate for `/graduate`. The vault doesn't grow. It evolves.
 
-Everyone will have access to the same AI models. The differentiator isn't the model. It's having years of interlinked personal writing for the model to work with.
+Everyone will have access to the same AI models. The differentiator is what you feed them. Years of interlinked personal writing. Decisions logged. Lessons captured. That compounds. Generic prompts don't.
 
 **Your notes are the moat.**
 
-Inspired by [Andrey Karpathy's LLM-Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) -- the idea that LLMs should maintain persistent, compounding knowledge bases instead of re-deriving answers every time.
+Inspired by [Andrey Karpathy's LLM-Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) -- persistent, compounding knowledge bases maintained by LLMs.
+
+---
+
+## Recommended Plugins
+
+| Plugin | Why |
+|---|---|
+| [Dataview](https://github.com/blacksmithgu/obsidian-dataview) | Dashboard queries |
+| [Templater](https://github.com/SilentVoid13/Templater) | Note templates |
+| [Kanban](https://github.com/mgmeyers/obsidian-kanban) | Board management |
+| [Calendar](https://github.com/liamcain/obsidian-calendar-plugin) | Daily note navigation |
 
 ---
 
 ## Contributing
 
-PRs welcome. Especially interested in:
-- New thinking tools (novel ways to use vault data for insight)
+PRs welcome:
+- New thinking tools
 - Note type schemas (habits, books, investments)
-- MCP integrations (Calendar, Linear, Slack context in daily rituals)
-- Alternative vault structures (GTD, PARA, Zettelkasten variants)
+- MCP integrations (Calendar, Linear, Slack)
+- Alternative vault structures
 - VS Code / Cursor setup guides
 
 ---
