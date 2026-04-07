@@ -346,6 +346,7 @@ Built by **Eugeniu Ghelbur**
 [![X](https://img.shields.io/badge/X-@eugeniu__ghelbur-000000?style=flat-square&logo=x)](https://x.com/eugeniu_ghelbur)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-eugeniu--ghelbur-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/eugeniu-ghelbur/)
 [![GitHub](https://img.shields.io/badge/GitHub-eugeniughelbur-181717?style=flat-square&logo=github)](https://github.com/eugeniughelbur/)
+[![Substack](https://img.shields.io/badge/Substack-ghelburlabs-FF6719?style=flat-square&logo=substack)](https://ghelburlabs.substack.com/)
 
 ---
 
