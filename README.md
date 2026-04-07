@@ -11,7 +11,7 @@
 <p align="center">
   <strong>Your Obsidian vault is dead weight. This skill makes it alive.</strong>
   <br />
-  <em>22 commands &middot; 4 thinking tools &middot; self-rewriting knowledge base &middot; 4 scheduled agents</em>
+  <em>24 commands &middot; 4 thinking tools &middot; self-rewriting knowledge base &middot; auto-synthesis &middot; agent-readable export &middot; 4 presets</em>
   <br /><br />
   <a href="#what-happens-when-you-install-this">See it in action</a> &middot;
   <a href="#the-three-layers">Architecture</a> &middot;
@@ -79,12 +79,12 @@ Two of the most powerful tools in your stack. Completely disconnected.
   |        obsidian-second-brain             |
   +-----------------------------------------+
   |                                         |
-  |   LAYER 1: Vault Operations (17 cmds)   |
+  |   LAYER 1: Vault Operations (19 cmds)   |
   |   "Claude remembers"                    |
   |   save, daily, log, task, person,       |
   |   decide, capture, find, recap, review, |
-  |   board, project, health, init,         |
-  |   ingest, adr, reconcile               |
+  |   board, project, health, init, ingest, |
+  |   adr, reconcile, synthesize, export    |
   +-----------------------------------------+
   |                                         |
   |   LAYER 2: Thinking Tools (4 cmds)      |
@@ -134,6 +134,8 @@ Two of the most powerful tools in your stack. Completely disconnected.
 | `/obsidian-project [name]` | Creates or updates a project note with board and daily links |
 | `/obsidian-health` | Vault audit -- broken links, contradictions, concept gaps, stale claims, duplicates, orphans |
 | `/obsidian-adr` | Decision records -- the vault knows why it's structured this way |
+| `/obsidian-synthesize` | Auto-synthesis -- the vault finds patterns on its own and writes synthesis pages without being asked |
+| `/obsidian-export` | Export a clean JSON or markdown snapshot any AI tool or agent can consume |
 | `/obsidian-init` | Scans your vault and generates `_CLAUDE.md`, `index.md`, and `log.md` |
 
 Every command searches before creating (no duplicates), propagates to every linked note (no orphans), and handles typos with fuzzy matching.
@@ -289,6 +291,7 @@ Complex commands spawn parallel agents and merge results.
 | `/obsidian-save` | People + Projects + Tasks + Decisions + Ideas |
 | `/obsidian-ingest` | Entities + Concepts + Projects + Contradictions |
 | `/obsidian-reconcile` | Claims + Entities + Decisions + Source Freshness |
+| `/obsidian-synthesize` | Cross-source + Entity Convergence + Concept Evolution + Orphan Rescue |
 | `/obsidian-challenge` | Decisions + Failures + Contradictions |
 | `/obsidian-emerge` | Daily notes + Dev logs + Decisions + Ideas |
 | `/obsidian-health` | Links + Duplicates + Frontmatter + Staleness + Orphans + Contradictions + Gaps + Stale Claims |
@@ -339,7 +342,13 @@ python bootstrap_vault.py --path ~/my-vault --name "Your Name" --style obsidian
 
 ## Install
 
-Two commands.
+One line. Three questions. Done.
+
+```bash
+curl -sL https://raw.githubusercontent.com/eugeniughelbur/obsidian-second-brain/main/scripts/quick-install.sh | bash
+```
+
+Or manual:
 
 ```bash
 git clone https://github.com/eugeniughelbur/obsidian-second-brain ~/.claude/skills/obsidian-second-brain
@@ -348,17 +357,28 @@ bash ~/.claude/skills/obsidian-second-brain/scripts/setup.sh "/path/to/your/vaul
 
 Then: `/obsidian-init`
 
-Claude scans your vault and generates `_CLAUDE.md` -- its operating manual for your specific vault.
-
 <details>
-<summary><strong>New vault? Bootstrap from scratch.</strong></summary>
+<summary><strong>New vault? Choose a preset.</strong></summary>
 
 ```bash
-python ~/.claude/skills/obsidian-second-brain/scripts/bootstrap_vault.py \
-  --path ~/my-vault --name "Your Name" --jobs "Company"
+# General purpose (default)
+python bootstrap_vault.py --path ~/my-vault --name "Your Name"
+
+# Or pick a preset:
+python bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset executive
+python bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset builder
+python bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset creator
+python bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset researcher
 ```
 
-Creates folders, templates, kanban boards, Home dashboard, and a ready-to-use `_CLAUDE.md`.
+| Preset | Optimized for | Kanban columns |
+|---|---|---|
+| **executive** | Decisions, people, meetings, strategy | OKRs, Quarterly, Weekly |
+| **builder** | Projects, dev logs, architecture, debugging | Backlog, Sprint, Done |
+| **creator** | Content pipeline, ideas, audience, publishing | Ideas, Drafts, Published |
+| **researcher** | Sources, literature, hypotheses, methodology | Reading, Processing, Synthesized |
+
+Each preset creates different folder structures, templates, daily note formats, and kanban boards tailored to that workflow.
 
 </details>
 

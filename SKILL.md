@@ -52,20 +52,38 @@ Scan the structure to understand: folder names, template locations, naming conve
 
 If the user has no vault yet, run:
 ```bash
-# Default: Wiki-style (LLM-first — optimized for Claude as primary reader/writer)
+# One-line install + bootstrap (asks 3 questions: vault path, your name, preset)
+curl -sL https://raw.githubusercontent.com/eugeniughelbur/obsidian-second-brain/main/scripts/quick-install.sh | bash
+
+# Or manual:
 python scripts/bootstrap_vault.py --path ~/path/to/vault --name "Your Name"
 
-# Alternative: Obsidian-style (human-first — for users who browse their vault daily)
-python scripts/bootstrap_vault.py --path ~/path/to/vault --name "Your Name" --style obsidian
+# With a preset:
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset executive
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset builder
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset creator
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --preset researcher
+
+# With style override:
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --style obsidian
+
+# With assistant mode (maintaining vault for someone else):
+python scripts/bootstrap_vault.py --path ~/my-vault --name "Your Name" --mode assistant --subject "Boss Name"
 ```
 
 Then configure `mcp-obsidian` to point at the new vault path and restart Claude.
 
-**Wiki-style (default)** creates: `raw/` (immutable sources), `wiki/` (Claude's workspace with entities/, concepts/, projects/, daily/, logs/, reviews/, tasks/, decisions/), `boards/`, `templates/`, plus `_CLAUDE.md`, `index.md`, `log.md`, and `SOUL.md`.
+**Presets** customize the vault for different use cases:
+- **`executive`** — Decisions, people, meetings, strategic planning. Kanban: OKRs, Quarterly, Weekly.
+- **`builder`** — Projects, dev logs, architecture decisions, debugging. Kanban: Backlog, Sprint, Done.
+- **`creator`** — Content calendar, ideas pipeline, audience notes, publishing. Kanban: Ideas, Drafts, Published.
+- **`researcher`** — Sources, literature notes, hypotheses, methodology. Kanban: Reading, Processing, Synthesized.
 
-**Obsidian-style** creates: the traditional folder structure (People/, Projects/, Ideas/, Daily/, etc.) optimized for human browsing.
+Default (no preset) gives a general-purpose vault. All presets use wiki-style by default.
 
-See `references/vault-schema.md` for full details on both structures.
+**Assistant mode** creates a `_CLAUDE.md` configured for operating a vault on behalf of someone else. See `references/claude-md-assistant-template.md`.
+
+See `references/vault-schema.md` for full structural details.
 
 ---
 
@@ -466,6 +484,38 @@ Steps:
    - **Ambiguous**: create `wiki/decisions/Conflict — Topic.md` with both sides, mark `status: open`
    - **Evolution**: update the page to current state with historical context
 5. Rebuild affected `index.md` sections, append to `log.md`, update daily note
+
+---
+
+### `/obsidian-synthesize`
+
+**Automatic synthesis — the vault thinks for itself.**
+
+Can run manually or as a scheduled agent. Scans the vault for patterns nobody asked about.
+
+Steps:
+1. Read `index.md` and `log.md` (last 20 entries) for recent activity
+2. Spawn parallel subagents:
+   - **Cross-source agent**: find concepts appearing in 2+ unrelated sources from the last 7 days
+   - **Entity convergence agent**: find people who appear together in multiple contexts but have no connection page
+   - **Concept evolution agent**: find concepts updated 3+ times and document how thinking changed
+   - **Orphan rescue agent**: find unlinked notes that should be connected to existing pages
+3. For each pattern: create `wiki/concepts/Synthesis — Title.md` with evidence, interpretation, and suggested action
+4. Link synthesis pages FROM all source notes they reference
+5. Update `index.md`, `log.md`, and today's daily note
+
+---
+
+### `/obsidian-export`
+
+**Export a clean snapshot any agent or tool can consume.**
+
+Steps:
+1. Scan all notes in `wiki/` and extract: path, title, type, date, status, summary, links, tags, frontmatter
+2. Output as JSON (default) to `_export/vault-snapshot.json` or markdown to `_export/vault-snapshot.md`
+3. The snapshot is a flat, structured representation of the vault — no folder structure knowledge needed
+4. Any AI tool, automation, or agent can read this file and understand the vault
+5. Append to `log.md`
 
 ---
 
