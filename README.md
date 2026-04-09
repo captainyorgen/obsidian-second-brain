@@ -63,7 +63,7 @@ A background agent updates it during your sessions. Scheduled agents run morning
 | Contradictions | You don't know they exist | `/reconcile` resolves them automatically |
 | Synthesis | You connect dots manually | `/synthesize` finds patterns across sources on its own |
 | Sharing vault data | Only Claude can read it | `/export` gives any AI tool a clean snapshot |
-| Facts change over time | Old info gets overwritten | Temporal facts track the full timeline -- nothing is lost |
+| Facts change over time | Old info gets overwritten | Bi-temporal facts track when it was true AND when the vault learned it |
 | Starting a new session | Re-explain who you are | `CRITICAL_FACTS.md` loads your identity in ~120 tokens |
 
 ---
@@ -208,7 +208,7 @@ This vault rewrites itself with every input:
 - **Ingest a source** -- existing pages get rewritten, contradictions resolved, patterns synthesized
 - **Save a conversation** -- entities, concepts, and decisions distribute across the vault
 - **Ask a question** -- the Two-Output Rule means every answer also updates pages
-- **A fact changes** -- temporal facts track the timeline. Old facts aren't deleted, they get a `until:` date. The vault remembers what was true and when.
+- **A fact changes** -- bi-temporal facts track when it was true AND when the vault learned it. "You believed X on Tuesday. After ingesting Y on Wednesday, you shifted to Z." Full audit trail.
 - **Do nothing** -- background agent and scheduled agents maintain it while you sleep
 - **Wait a week** -- auto-synthesis finds cross-source patterns and writes connection pages
 

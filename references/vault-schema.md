@@ -116,13 +116,15 @@ tags:
   - project
 status: active   # active | planning | completed | archived | on-hold
 job: "[[Acme Corp]]"   # or Personal, [[Company Name]]
-timeline:                # temporal facts — status changes over time
+timeline:                # bi-temporal facts — status changes over time
   - fact: "status: planning"
     from: 2026-03-01
     until: 2026-03-15
+    learned: 2026-03-01
   - fact: "status: active"
     from: 2026-03-15
     until: present
+    learned: 2026-03-15
 ---
 ```
 
@@ -150,22 +152,31 @@ tags:
 role: "Senior Engineer"        # current role
 company: "[[Acme Corp]]"       # current company
 last_interaction: 2026-03-24
-timeline:                       # temporal facts — never delete, only append
+timeline:                       # bi-temporal facts — never delete, only append
   - fact: "CTO at Acme Corp"
-    from: 2024-01-01
+    from: 2024-01-01            # event time: when the fact was true
     until: 2026-04-07
+    learned: 2026-02-23         # transaction time: when the vault learned it
   - fact: "Architect at Acme Corp"
     from: 2026-04-07
     until: present
+    learned: 2026-04-07
+    source: "[[2026-04-07]]"    # where the vault learned it from
 ---
 ```
 
-**Temporal facts rule:** never overwrite a role, company, status, or location. Add a new entry to `timeline:` with `from` and `until` dates. The `role:` and `company:` top-level fields always reflect the CURRENT state. The `timeline:` preserves history.
+**Bi-temporal facts rule:** never overwrite a role, company, status, or location. Add a new entry to `timeline:` with:
+- `from` / `until` — **event time**: when the fact was true in reality
+- `learned` — **transaction time**: when the vault first recorded this fact
+- `source` (optional) — where the vault learned it from (daily note, ingested source, etc.)
+
+The `role:` and `company:` top-level fields always reflect the CURRENT state. The `timeline:` preserves full history.
 
 This enables:
 - Historical queries ("who was CTO in January?")
-- Smart reconciliation (two notes with different roles = different time periods, not a contradiction)
-- Full change history for people, companies, tools, and projects
+- Reflective thinking ("you believed X on Tuesday, but after ingesting Y on Wednesday, your understanding shifted to Z")
+- Smart reconciliation (different roles at different times = not a contradiction)
+- Audit trail (when did the vault learn each fact, and from what source?)
 
 ### Source Note (raw/)
 ```yaml

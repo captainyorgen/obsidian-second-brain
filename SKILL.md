@@ -105,22 +105,30 @@ Every write operation must ask: *where else does this belong?*
 
 Always propagate. Never create a single orphaned note.
 
-### Temporal facts — never overwrite, always append
-When a fact changes (role, company, status, location, tool), NEVER delete the old value. Add a new entry to the `timeline:` frontmatter array:
+### Bi-temporal facts — never overwrite, always append
+When a fact changes (role, company, status, location, tool), NEVER delete the old value. Add a new entry to the `timeline:` frontmatter array with both event time AND transaction time:
 
 ```yaml
 timeline:
   - fact: "CTO at Single Grain"
-    from: 2024-01-01
+    from: 2024-01-01            # event time: when it was true
     until: 2026-04-07
+    learned: 2026-02-23         # transaction time: when the vault learned it
+    source: "[[2026-02-23]]"    # where from
   - fact: "Architect at Single Grain"
     from: 2026-04-07
     until: present
+    learned: 2026-04-07
+    source: "[[2026-04-07]]"
 ```
 
-Top-level fields (`role:`, `status:`, `company:`) always reflect the CURRENT state. The `timeline:` preserves the full history. This applies to entities, projects, and any note where facts change over time.
+Top-level fields (`role:`, `status:`, `company:`) always reflect the CURRENT state. The `timeline:` preserves the full history with provenance.
 
-This enables historical queries ("who was my manager in February?"), smart reconciliation (different roles at different times = not a contradiction), and full change tracking.
+This enables:
+- Historical queries ("who was my manager in February?")
+- Reflective thinking ("you believed X on Tuesday, then ingested Y on Wednesday and shifted to Z")
+- Smart reconciliation (different facts at different times = not a contradiction)
+- Full audit trail (when did the vault learn each fact, from what source?)
 
 ### CRITICAL_FACTS.md — always loaded
 A tiny file (~120 tokens) loaded alongside `SOUL.md` at L0 in every session. Contains facts needed in every conversation:
