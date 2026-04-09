@@ -40,6 +40,13 @@ Use the obsidian-second-brain skill. Execute `/obsidian-world`:
 
 Keep output concise — this is a boot-up sequence, not a report. The user should glance at it and say "yes, Claude is up to speed" and start working immediately.
 
-If identity files (SOUL.md, CORE_VALUES.md) don't exist, offer to create them by asking 5-7 quick questions about the user's role, values, and communication preferences.
+4. **Core memory pinning** — during the session, if the user is working on a specific task that requires persistent context (debugging a complex API, reviewing a long document, planning a project), Claude can PIN critical information to a `PINNED.md` file at the vault root:
+   - Write task-specific facts, schemas, or reference data to `PINNED.md`
+   - This file is loaded at L0 alongside SOUL.md and CRITICAL_FACTS.md
+   - When the task is done, clear `PINNED.md`
+   - This prevents critical session context from being lost during long conversations or context compaction
+   - Claude should proactively suggest pinning when it detects the user is deep in a complex task
+
+If identity files (SOUL.md, CRITICAL_FACTS.md) don't exist, offer to create them by asking 5-7 quick questions about the user's role, values, and communication preferences.
 
 If `index.md` doesn't exist, offer to run `/obsidian-init` to generate it.
