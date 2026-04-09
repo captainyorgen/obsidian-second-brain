@@ -11,7 +11,7 @@
 <p align="center">
   <strong>Your Obsidian vault is dead weight. This skill makes it alive.</strong>
   <br /><br />
-  <em>24 commands &middot; self-rewriting knowledge base &middot; auto-synthesis &middot; thinking tools that argue with you &middot; 4 scheduled agents &middot; 4 role presets</em>
+  <em>25 commands &middot; self-rewriting knowledge base &middot; auto-synthesis &middot; thinking tools that argue with you &middot; 4 scheduled agents &middot; 4 role presets</em>
   <br /><br />
   <a href="#what-happens-when-you-install-this">See it in action</a> &middot;
   <a href="#24-commands">All commands</a> &middot;
@@ -73,7 +73,7 @@ A background agent updates it during your sessions. Scheduled agents run morning
 ```
   +------------------------------------------+
   |                                          |
-  |   LAYER 1: Operations (19 commands)      |
+  |   LAYER 1: Operations (20 commands)      |
   |   Claude remembers everything            |
   |                                          |
   +------------------------------------------+
@@ -126,6 +126,7 @@ A background agent updates it during your sessions. Scheduled agents run morning
 | `/obsidian-project` | Project note with board and daily links |
 | `/obsidian-health` | Vault audit -- contradictions, gaps, stale claims, orphans |
 | `/obsidian-adr` | Decision records -- the vault knows why it's structured this way |
+| `/obsidian-visualize` | Generates a visual canvas map — see the shape of your second brain |
 | `/obsidian-init` | Generates `_CLAUDE.md`, `index.md`, `log.md` |
 
 ### Thinking -- Claude thinks with you
