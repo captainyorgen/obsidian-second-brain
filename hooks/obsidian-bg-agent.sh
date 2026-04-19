@@ -15,9 +15,16 @@
 VAULT="${OBSIDIAN_VAULT_PATH:-}"
 [[ -z "$VAULT" ]] && exit 0
 
-# Parse compaction summary from stdin JSON
+# PostCompact stdin includes `transcript_path`; the compaction summary itself
+# is written into the transcript JSONL as entries with `isCompactSummary: true`.
+# We read the most recent one here.
 INPUT=$(cat)
-SUMMARY=$(printf '%s' "$INPUT" | jq -r '.summary // .content // ""' 2>/dev/null || true)
+TRANSCRIPT=$(printf '%s' "$INPUT" | jq -r '.transcript_path // ""' 2>/dev/null || true)
+[[ -z "$TRANSCRIPT" || ! -f "$TRANSCRIPT" ]] && exit 0
+
+# Stream the JSONL (transcripts can be 100MB+). base64-encode each match so the
+# multi-line content stays on one line, then decode the most recent one.
+SUMMARY=$(jq -rc 'select(.isCompactSummary == true) | .message.content // "" | @base64' "$TRANSCRIPT" 2>/dev/null | tail -n 1 | base64 -d 2>/dev/null || true)
 [[ -z "$SUMMARY" ]] && exit 0
 
 TODAY=$(date +%Y-%m-%d)
