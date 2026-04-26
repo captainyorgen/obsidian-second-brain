@@ -21,3 +21,7 @@ The optional argument is the idea, belief, or plan to challenge. If not provided
 6. Log the challenge in today's daily note under a Thinking section
 
 Do not be agreeable. The entire point is to pressure-test. Cite specific vault files. If you find nothing contradictory, say so honestly — but search thoroughly first.
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

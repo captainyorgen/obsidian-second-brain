@@ -24,3 +24,7 @@ Two arguments required: the two topics, domains, or note names to connect. If on
 8. Log the connection exercise in today's daily note
 
 The value is in unexpected links. If the connection is obvious, dig deeper. The best output makes the user say "I never thought of it that way."
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

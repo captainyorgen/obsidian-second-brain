@@ -98,6 +98,19 @@ See `references/vault-schema.md` for full structural details.
 
 ## Core Operating Principles
 
+### AI-first vault rule (applies to every note)
+The vault is designed for **future-Claude** to read and reason over, not for human review. Every note Claude writes — across all 31 commands — must follow `references/ai-first-rules.md`:
+
+1. **Self-contained context** — each note explains itself; don't rely on backlinks alone
+2. **"For future Claude" preamble** — 2-3 sentence summary so Claude can decide relevance in 10 seconds
+3. **Rich, consistent frontmatter** — `type`, `date`, `tags`, `ai-first: true`, plus type-specific fields (see `ai-first-rules.md` for schemas per note type)
+4. **Recency markers per claim** — "Mem0 raised $24M (as of 2026-04, mem0.ai)" so future-Claude knows what to verify
+5. **Sources preserved verbatim** — every external claim has its source URL inline
+6. **Cross-links mandatory** — every person/project/idea/decision uses `[[wikilinks]]`
+7. **Confidence levels** — `stated | high | medium | speculation` where applicable
+
+This rule lives in `_CLAUDE.md` Section 0 of every vault using this skill, and in `references/ai-first-rules.md` (the canonical specification with frontmatter schemas + preamble templates per note type).
+
 ### Never create in isolation
 Every write operation must ask: *where else does this belong?*
 

@@ -13,3 +13,7 @@ The optional argument narrows focus to a specific topic.
 5. Append each decision to the project note's `## Key Decisions` section with today's date
 6. Log a summary in today's daily note
 7. If a decision affects multiple projects, log it in all of them
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

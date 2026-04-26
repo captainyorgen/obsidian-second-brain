@@ -39,3 +39,7 @@ This command can run manually or as a scheduled agent. It thinks for you.
 8. If a daily note exists for today, add a Synthesis section with a brief summary
 
 The vault should generate its own insights. Not just when asked — on its own schedule.
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

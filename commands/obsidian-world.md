@@ -50,3 +50,7 @@ Keep output concise — this is a boot-up sequence, not a report. The user shoul
 If identity files (SOUL.md, CRITICAL_FACTS.md) don't exist, offer to create them by asking 5-7 quick questions about the user's role, values, and communication preferences.
 
 If `index.md` doesn't exist, offer to run `/obsidian-init` to generate it.
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

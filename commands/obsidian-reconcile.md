@@ -36,3 +36,7 @@ The optional argument is a topic or entity to focus on. If not provided, scan th
    - **Stale pages updated** (pages rewritten with fresher sources)
 
 The vault should never contain two pages that disagree without knowing they disagree. Contradictions are either resolved or explicitly documented as open questions.
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

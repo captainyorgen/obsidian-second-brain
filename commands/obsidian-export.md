@@ -52,3 +52,7 @@ The optional argument is the format: `json` (default) or `markdown`.
 5. Append to `log.md`: `## [YYYY-MM-DD] export | Vault snapshot exported (format, N notes)`
 
 This file is the bridge between your vault and any other AI tool, automation, or agent. They don't need to know your folder structure. They read the snapshot.
+
+---
+
+**AI-first rule:** Every note created or updated by this command MUST follow `references/ai-first-rules.md` — `## For future Claude` preamble, rich frontmatter (`type`, `date`, `tags`, `ai-first: true`, plus type-specific fields), recency markers per external claim, mandatory `[[wikilinks]]` for every person/project/concept referenced, sources preserved verbatim with URLs inline, and confidence levels where applicable. The vault is for future-Claude retrieval — not human reading.

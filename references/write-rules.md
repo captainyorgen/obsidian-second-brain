@@ -2,6 +2,8 @@
 
 How Claude writes, links, formats, and updates notes in an Obsidian vault.
 
+> **Read `references/ai-first-rules.md` first.** Every note Claude writes must follow the AI-first rule (preamble, rich frontmatter, recency markers, mandatory wikilinks, sources verbatim, confidence levels). The rules below are operational details on top of that foundation.
+
 ---
 
 ## The Propagation Rule
