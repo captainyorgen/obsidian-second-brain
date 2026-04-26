@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - FAQ section in README to boost AI-search citation rate
 - GitHub Pages site with Cayman theme + jekyll-seo-tag + jekyll-sitemap
 - Banner image and polished author hero in README
+- `examples/sample-vault/` showing 6 AI-first compliant note types (daily, person, project, idea, devlog, plus `_CLAUDE.md` template)
 
 ### Fixed
 
