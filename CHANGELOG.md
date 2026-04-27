@@ -20,6 +20,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Banner image and polished author hero in README
 - `examples/sample-vault/` showing 6 AI-first compliant note types (daily, person, project, idea, devlog, plus `_CLAUDE.md` template)
 - `SECURITY.md` — vulnerability reporting policy and coordinated disclosure timeline
+- Schema.org JSON-LD `SoftwareApplication` block on the Pages site (`_includes/head_custom.html`) for rich-result eligibility and AI-search citation
+- 3 new FAQ entries targeting "Obsidian plugin vs Claude Code skill" search intent
+
+### Changed
+
+- GitHub About description rewritten to lead with "Claude Code skill for Obsidian"
+- README banner alt text now contains the full search-intent phrasing
+- GitHub topics: swapped `markdown` and `pkm` for `obsidian-skill` and `claude-code-skill`
 
 ### Fixed
 
