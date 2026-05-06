@@ -72,11 +72,9 @@ fi
 
 # ── add env var ───────────────────────────────────────────────────────────────
 
-ESCAPED_VAULT=$(printf '%s' "$VAULT" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()))" | tr -d '"')
-
 jq --arg vault "$VAULT" '
   .env = (.env // {}) | .env.OBSIDIAN_VAULT_PATH = $vault
-' "$SETTINGS" > "$SETTINGS.tmp" && mv "$SETTINGS.tmp" "$SETTINGS"
+' "$SETTINGS" > "$SETTINGS.tmp" && cat "$SETTINGS.tmp" > "$SETTINGS" && rm "$SETTINGS.tmp"
 
 green "   OBSIDIAN_VAULT_PATH set"
 
@@ -105,7 +103,7 @@ else
         "async": true
       }]
     }]
-  ' "$SETTINGS" > "$SETTINGS.tmp" && mv "$SETTINGS.tmp" "$SETTINGS"
+  ' "$SETTINGS" > "$SETTINGS.tmp" && cat "$SETTINGS.tmp" > "$SETTINGS" && rm "$SETTINGS.tmp"
   green "   PostCompact hook wired"
 fi
 
