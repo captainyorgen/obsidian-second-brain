@@ -45,7 +45,7 @@ Context (1): obsidian-world.
 
 Research (5, new in v0.5): x-read, x-pulse, research, research-deep, youtube.
 
-Plus 4 scheduled agents (morning, nightly, weekly, health-check) and 1 background agent that runs on Claude Code's PostCompact hook.
+Plus 4 scheduled agents (morning, nightly, weekly, health-check).
 
 ## Stack
 

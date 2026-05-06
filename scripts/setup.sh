@@ -7,16 +7,13 @@
 # What it does:
 #   1. Validates the vault path
 #   2. Adds OBSIDIAN_VAULT_PATH to ~/.claude/settings.json
-#   3. Wires the PostCompact background agent hook
-#   4. Makes the hook script executable
-#   5. Registers slash commands in ~/.claude/commands/
-#   6. Configures the MCP server for Claude Code (optional)
+#   3. Registers slash commands in ~/.claude/commands/
+#   4. Configures the MCP server for Claude Code (optional)
 
 set -euo pipefail
 
 SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SETTINGS="$HOME/.claude/settings.json"
-HOOK_SCRIPT="$SKILL_DIR/hooks/obsidian-bg-agent.sh"
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -49,15 +46,9 @@ echo "Vault: $VAULT"
 echo "Skill: $SKILL_DIR"
 echo ""
 
-# ── make hook executable ──────────────────────────────────────────────────────
-
-step "1. Making hook script executable..."
-chmod +x "$HOOK_SCRIPT"
-green "   Done — $HOOK_SCRIPT"
-
 # ── ensure settings.json exists ───────────────────────────────────────────────
 
-step "2. Updating ~/.claude/settings.json..."
+step "1. Updating ~/.claude/settings.json..."
 
 if [[ ! -f "$SETTINGS" ]]; then
   echo "{}" > "$SETTINGS"
@@ -72,46 +63,15 @@ fi
 
 # ── add env var ───────────────────────────────────────────────────────────────
 
-ESCAPED_VAULT=$(printf '%s' "$VAULT" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()))" | tr -d '"')
-
 jq --arg vault "$VAULT" '
   .env = (.env // {}) | .env.OBSIDIAN_VAULT_PATH = $vault
-' "$SETTINGS" > "$SETTINGS.tmp" && mv "$SETTINGS.tmp" "$SETTINGS"
+' "$SETTINGS" > "$SETTINGS.tmp" && cat "$SETTINGS.tmp" > "$SETTINGS" && rm "$SETTINGS.tmp"
 
 green "   OBSIDIAN_VAULT_PATH set"
 
-# ── add PostCompact hook ──────────────────────────────────────────────────────
-
-HOOK_CMD="$HOOK_SCRIPT"
-
-# Check if hook already exists
-EXISTING=$(jq -r '
-  .hooks.PostCompact // [] |
-  .[].hooks // [] |
-  .[].command // ""
-' "$SETTINGS" 2>/dev/null | grep -F "$HOOK_CMD" || true)
-
-if [[ -n "$EXISTING" ]]; then
-  yellow "   PostCompact hook already configured — skipping"
-else
-  jq --arg cmd "$HOOK_CMD" '
-    .hooks = (.hooks // {}) |
-    .hooks.PostCompact = (.hooks.PostCompact // []) + [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": $cmd,
-        "timeout": 10,
-        "async": true
-      }]
-    }]
-  ' "$SETTINGS" > "$SETTINGS.tmp" && mv "$SETTINGS.tmp" "$SETTINGS"
-  green "   PostCompact hook wired"
-fi
-
 # ── register slash commands ──────────────────────────────────────────────────
 
-step "3. Registering slash commands in ~/.claude/commands/..."
+step "2. Registering slash commands in ~/.claude/commands/..."
 
 COMMANDS_SRC="$SKILL_DIR/commands"
 COMMANDS_DST="$HOME/.claude/commands"
@@ -144,7 +104,7 @@ fi
 
 # ── optional: MCP server (Claude Code only) ───────────────────────────────────
 
-step "4. MCP server (optional — Claude Code only)..."
+step "3. MCP server (optional — Claude Code only)..."
 echo "   The obsidian-vault MCP server gives Claude faster vault access."
 echo "   Without it, Claude reads/writes vault files directly (works fine)."
 echo ""
@@ -176,6 +136,5 @@ echo "   /obsidian-init"
 echo ""
 echo "That's it. Claude will scan your vault and generate its operating manual."
 echo ""
-echo "Background agent logs: /tmp/obsidian-bg-agent.log"
-echo "Health check:          python scripts/vault_health.py --path \"$VAULT\""
+echo "Health check: python scripts/vault_health.py --path \"$VAULT\""
 echo ""

@@ -216,7 +216,7 @@ Unsaved conversations are lost knowledge. Claude should proactively remind the u
 - After 10+ exchanges: suggest "Want me to run /obsidian-save before we continue?"
 - When the user signals wrap-up (e.g., "ok", "thanks", "done", "bye", "that's it"): suggest "Before you go — want me to /obsidian-save this conversation?"
 - When a logical work block completes (feature shipped, decision made, problem solved): suggest saving
-- Never skip the reminder. This is especially critical on Claude Desktop where there's no background agent.
+- Never skip the reminder.
 
 ### Search before creating
 Before creating any new note, search for an existing one:
@@ -1007,61 +1007,6 @@ To list or remove scheduled agents:
 /schedule list
 /schedule remove obsidian-morning
 ```
-
----
-
-## Background Agent (PostCompact Hook)
-
-A background agent that fires automatically whenever Claude compacts the conversation context. It reads the session summary and propagates everything worth preserving to the vault — no user action required.
-
-**What it does:** After each compaction, a headless `claude -p` subprocess wakes up, reads `_CLAUDE.md`, scans the summary for vault-worthy items (people, projects, decisions, tasks, dev work, ideas), and writes updates everywhere they belong — people notes, project notes, dev logs, kanban boards, and today's daily note.
-
-**How it works:**
-1. `PostCompact` hook fires in Claude Code after context compaction
-2. Hook script reads the JSON summary from stdin
-3. Spawns a headless `claude --dangerously-skip-permissions -p` subprocess in the vault directory
-4. Agent runs silently, propagates updates, and exits — user sees nothing
-
-**Setup:**
-
-1. Make the hook script executable (one-time):
-   ```bash
-   chmod +x ~/.claude/skills/obsidian-second-brain/hooks/obsidian-bg-agent.sh
-   ```
-
-2. Set `OBSIDIAN_VAULT_PATH` in `~/.claude/settings.json`:
-   ```json
-   {
-     "env": {
-       "OBSIDIAN_VAULT_PATH": "/path/to/your/vault"
-     }
-   }
-   ```
-
-3. Add the `PostCompact` hook to `~/.claude/settings.json`:
-   ```json
-   {
-     "hooks": {
-       "PostCompact": [
-         {
-           "matcher": "",
-           "hooks": [
-             {
-               "type": "command",
-               "command": "/Users/you/.claude/skills/obsidian-second-brain/hooks/obsidian-bg-agent.sh",
-               "timeout": 10,
-               "async": true
-             }
-           ]
-         }
-       ]
-     }
-   }
-   ```
-
-**Debugging:** The agent logs to `/tmp/obsidian-bg-agent.log`. Check there if updates aren't appearing.
-
-**Safety:** The agent never deletes, archives, or merges anything. It only adds or updates. If the summary has nothing vault-worthy, it exits without touching the vault.
 
 ---
 

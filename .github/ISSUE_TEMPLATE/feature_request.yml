@@ -18,7 +18,7 @@ body:
         - New slash command (e.g., /obsidian-something)
         - Improvement to an existing command
         - New research source (e.g., Reddit, podcasts, papers)
-        - New scheduled or background agent
+        - New scheduled agent
         - New integration (Notion, Linear, Slack, etc.)
         - Documentation / examples
         - Performance / cost optimization

@@ -47,7 +47,6 @@ body:
         - "/research"
         - "/research-deep"
         - "/youtube"
-        - Background agent (PostCompact hook)
         - Scheduled agent (morning / nightly / weekly / health)
         - install.sh
         - Other / not sure

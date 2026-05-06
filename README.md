@@ -183,7 +183,7 @@ Free transcript via youtube-transcript-api. Optional metadata + top comments via
   +------------------------------------------+
   |                                          |
   |   ALWAYS ON                              |
-  |   Background agent + 4 scheduled agents  |
+  |   4 scheduled agents                     |
   |   Auto-synthesis + save reminders        |
   |                                          |
   +------------------------------------------+
@@ -398,7 +398,7 @@ This vault rewrites itself with every input:
 - **Save a conversation** -- entities, concepts, and decisions distribute across the vault
 - **Ask a question** -- the Two-Output Rule means every answer also updates pages
 - **A fact changes** -- bi-temporal facts track when it was true AND when the vault learned it. "You believed X on Tuesday. After ingesting Y on Wednesday, you shifted to Z." Full audit trail.
-- **Do nothing** -- background agent and scheduled agents maintain it while you sleep
+- **Do nothing** -- scheduled agents maintain it while you sleep
 - **Wait a week** -- auto-synthesis finds cross-source patterns and writes connection pages
 
 The vault after a week is fundamentally different from the vault you started with.
@@ -424,15 +424,7 @@ No preset? You get a general-purpose vault that works for everyone.
 
 ---
 
-## Background Agent & Scheduled Agents
-
-**Background:** fires after every context compaction. You keep working. The vault updates itself.
-
-```
-PostCompact -> obsidian-bg-agent.sh -> claude -p (headless) -> vault updated
-```
-
-**Scheduled:**
+## Scheduled Agents
 
 | Agent | When | What |
 |---|---|---|

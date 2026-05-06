@@ -7,7 +7,7 @@ Generate a visual architecture diagram (Mind Map, Infographic, or Slide Deck) of
 
 ## System Overview
 
-obsidian-second-brain is a Claude Code skill that turns an Obsidian vault into a personal AI operating system. As of v0.5: 6 layers, 31 slash commands, 4 scheduled agents, 1 background agent, a research toolkit (Grok + Perplexity + YouTube), and a central config file (_CLAUDE.md) that ties everything together. Section 0 of `_CLAUDE.md` enforces the AI-first vault rule — every note is designed for future-Claude retrieval, not human reading.
+obsidian-second-brain is a Claude Code skill that turns an Obsidian vault into a personal AI operating system. As of v0.5: 6 layers, 31 slash commands, 4 scheduled agents, a research toolkit (Grok + Perplexity + YouTube), and a central config file (_CLAUDE.md) that ties everything together. Section 0 of `_CLAUDE.md` enforces the AI-first vault rule — every note is designed for future-Claude retrieval, not human reading.
 
 ---
 
@@ -196,25 +196,6 @@ Purpose: Autonomous vault maintenance with zero user intervention.
 
 ---
 
-## Layer 5: Background Agent (PostCompact hook)
-
-Purpose: Silent vault updates during active sessions.
-
-### Flow:
-1. User works in Claude Code normally
-2. Context compaction occurs (automatic)
-3. PostCompact hook fires → obsidian-bg-agent.sh
-4. Shell script reads JSON summary from stdin
-5. Spawns headless `claude -p` subprocess in vault directory
-6. Agent reads _CLAUDE.md, scans session summary
-7. Writes vault updates (people, projects, decisions, tasks, ideas)
-8. Exits silently — user sees nothing
-9. Log file: /tmp/obsidian-bg-agent.log
-
-Safety: Never deletes, archives, or merges. Only adds or updates.
-
----
-
 ## Vault Folder Structure
 
 ```
@@ -253,9 +234,6 @@ User Conversation
        |
   _CLAUDE.md (read by every Claude surface on boot)
 
-
-Background:
-  PostCompact hook ──> headless claude -p ──> vault updated silently
 
 Scheduled:
   8 AM  ──> morning agent  ──> daily note + overdue tasks
