@@ -604,6 +604,14 @@ PRs welcome:
 
 ---
 
+## Sponsors
+
+Sponsorships help fund ongoing development of obsidian-second-brain — new commands, research-toolkit API costs, and ongoing maintenance.
+
+[![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-eugeniughelbur-EA4AAA?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://github.com/sponsors/eugeniughelbur)
+
+---
+
 ## Author
 
 Built by **Eugeniu Ghelbur**
