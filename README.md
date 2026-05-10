@@ -24,7 +24,9 @@
   <br /><br />
   <em>Every source updates existing pages instead of just appending new ones. Contradictions reconcile automatically. Your vault compounds while you sleep.</em>
   <br /><br />
-  <em>31 commands &middot; auto-synthesis &middot; thinking tools that argue with you &middot; live research from X, the web, and YouTube &middot; 4 scheduled agents &middot; 4 role presets</em>
+  <em>31 commands &middot; auto-synthesis &middot; thinking tools that argue with you</em>
+  <br /><br />
+  <em>live research from X, the web, and YouTube &middot; 4 scheduled agents &middot; 4 role presets</em>
   <br /><br />
   <a href="#what-happens-when-you-install-this">See it in action</a> &middot;
   <a href="#31-commands">All commands</a> &middot;
@@ -34,13 +36,17 @@
 </p>
 
 <p align="center">
-  <strong>Read the origin story:</strong> <a href="https://ghelburlabs.substack.com/p/i-built-this-for-myself-then-1374">"I built this for myself. Then 1,374 strangers cloned it."</a><br/>
-  <em>The two tools you already use that don't talk to each other, the institutional-amnesia problem this solves, and what 1,000+ stars in 7 weeks taught me.</em>
+  <strong>From the blog</strong>
 </p>
 
 <p align="center">
-  <strong>Read the long-form deep dive:</strong> <a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">"I rebuilt Karpathy's LLM Wiki. Here's what's missing from the original."</a><br/>
-  <em>Why append-only LLM wikis break at scale, the AI-First Vault Principle, and the three bugs I shipped in the first version.</em>
+  <strong>Origin story:</strong> <a href="https://ghelburlabs.substack.com/p/i-built-this-for-myself-then-1374">"I built this for myself. Then 1,374 strangers cloned it."</a><br />
+  <em>Two disconnected tools &middot; the institutional-amnesia problem &middot; 1,000+ stars in 7 weeks</em>
+</p>
+
+<p align="center">
+  <strong>Deep dive:</strong> <a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">"I rebuilt Karpathy's LLM Wiki. Here's what's missing from the original."</a><br />
+  <em>Why append-only breaks at scale &middot; the AI-First Vault Principle &middot; three bugs in v1</em>
 </p>
 
 <p align="center">
