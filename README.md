@@ -34,6 +34,11 @@
 </p>
 
 <p align="center">
+  <strong>Read the origin story:</strong> <a href="https://ghelburlabs.substack.com/p/i-built-this-for-myself-then-1374">"I built this for myself. Then 1,374 strangers cloned it."</a><br/>
+  <em>The two tools you already use that don't talk to each other, the institutional-amnesia problem this solves, and what 1,000+ stars in 7 weeks taught me.</em>
+</p>
+
+<p align="center">
   <strong>Read the long-form deep dive:</strong> <a href="https://ghelburlabs.substack.com/p/i-rebuilt-karpathys-llm-wiki-heres">"I rebuilt Karpathy's LLM Wiki. Here's what's missing from the original."</a><br/>
   <em>Why append-only LLM wikis break at scale, the AI-First Vault Principle, and the three bugs I shipped in the first version.</em>
 </p>
