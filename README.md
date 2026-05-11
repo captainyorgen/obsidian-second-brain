@@ -50,6 +50,11 @@
 </p>
 
 <p align="center">
+  <strong>One post per Tuesday on Obsidian + AI workflows, agent patterns, and bringing AI into real work.</strong><br />
+  <a href="https://theaioperator.io">Subscribe to The AI Operator &rarr;</a>
+</p>
+
+<p align="center">
   <strong>Research toolkit</strong> — <code>/x-read</code> · <code>/x-pulse</code> · <code>/research</code> · <code>/research-deep</code> · <code>/youtube</code><br/>
   <em>Pull live X posts, web research with citations, and YouTube transcripts straight into your vault as AI-first notes. <br/>
   Vault-first synthesis knows what you already know and fills only the gaps.</em>
