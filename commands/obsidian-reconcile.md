@@ -1,6 +1,7 @@
 ---
 description: Find and resolve contradictions in the vault — the vault maintains its own truth
 category: thinking
+triggers_en: ["find contradictions", "reconcile vault", "fix conflicts", "vault contradictions"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-reconcile $ARGUMENTS`:

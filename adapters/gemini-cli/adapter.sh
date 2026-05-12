@@ -50,6 +50,7 @@ agent) should follow when the user's request matches its trigger phrase.
 EOF
 
     emit_routing_table_grouped "$src/commands" "$GEMINI_PLATFORM" ".gemini/commands"
+    emit_trigger_reference     "$src/commands" "$GEMINI_PLATFORM"
 
     cat <<'EOF'
 

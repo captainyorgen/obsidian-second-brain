@@ -1,6 +1,7 @@
 ---
 description: Generate a structured weekly or monthly review note from vault history
 category: thinking
+triggers_en: ["weekly review", "monthly review", "review my week", "review my month"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-review $ARGUMENTS`:

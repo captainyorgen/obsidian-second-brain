@@ -1,6 +1,7 @@
 ---
 description: Scan X for what's trending in a topic — themes, voices, hooks, and post ideas powered by Grok + Live Search
 category: research
+triggers_en: ["x pulse", "what is trending on twitter", "scan x for", "twitter pulse"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/x-pulse [topic]`:

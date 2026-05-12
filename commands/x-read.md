@@ -1,6 +1,7 @@
 ---
 description: Deep-read an X (Twitter) post via Grok + Live Search — verbatim post, thread, TL;DR, claims, reply sentiment, voices to watch
 category: research
+triggers_en: ["read this x post", "deep read this tweet", "analyze this tweet", "read this thread"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/x-read [url]`:

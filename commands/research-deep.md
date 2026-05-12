@@ -1,6 +1,7 @@
 ---
 description: Vault-first deep research — scans vault, identifies gaps, fills via Perplexity + Grok, synthesizes a delta, then propagates updates across people/projects/ideas via /obsidian-save
 category: research
+triggers_en: ["deep research", "thorough research", "vault-first research", "research gaps"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/research-deep [topic]`:

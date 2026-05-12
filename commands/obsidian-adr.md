@@ -1,6 +1,7 @@
 ---
 description: Generate a decision record when the vault structure changes — the vault knows why it knows what it does
 category: thinking
+triggers_en: ["log this decision", "ADR", "record decision", "decision record"]
 ---
 
 Use the obsidian-second-brain skill. Execute `/obsidian-adr $ARGUMENTS`:

@@ -49,6 +49,7 @@ agent) should follow when the user's request matches its trigger phrase.
 EOF
 
     emit_routing_table_grouped "$src/commands" "$OPENCODE_PLATFORM" ".opencode/commands"
+    emit_trigger_reference     "$src/commands" "$OPENCODE_PLATFORM"
 
     cat <<'EOF'
 

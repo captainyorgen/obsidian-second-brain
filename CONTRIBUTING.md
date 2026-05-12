@@ -95,6 +95,44 @@ Documentation PRs are always welcome. Specifically helpful:
 
 No issue required for typo fixes — just open a PR.
 
+### 🌍 Translating trigger phrases (multilingual support)
+
+Every command in `commands/<name>.md` declares trigger phrases per language in its frontmatter:
+
+```yaml
+---
+description: Save everything worth keeping from this conversation to the vault
+category: vault
+triggers_en: ["save this", "save the conversation", "save to vault", "obsidian save"]
+---
+```
+
+To add a new language, add a `triggers_<two-letter-code>:` line right after the existing `triggers_en:` line, with a list of equivalent phrases in that language. **Important:** use natural, conversational phrases a native speaker would actually say — not literal word-for-word translations of the English.
+
+Supported language codes (add more by editing `_lang_label()` in `adapters/lib.sh`):
+
+| Code | Label |
+|---|---|
+| `en` | English |
+| `es` | Español |
+| `it` | Italiano |
+| `fr` | Français |
+| `de` | Deutsch |
+| `pt` | Português |
+| `ru` | Русский |
+| `ja` | 日本語 |
+
+Example: adding Spanish to `obsidian-save`:
+
+```yaml
+triggers_en: ["save this", "save the conversation", "save to vault"]
+triggers_es: ["guarda esto", "guarda la conversación", "guarda al vault"]
+```
+
+When you rebuild (`bash scripts/build.sh`), the new language automatically appears as its own section under `## Trigger phrases` in the dispatcher files (`AGENTS.md`, `GEMINI.md`). No adapter code changes needed.
+
+Translation PRs welcome for any of the 31 commands. Send one language at a time, full coverage. Open `commands/*.md`, add your `triggers_<code>:` line under the existing `triggers_en:`, and open a PR titled `Add <Language> trigger phrases`.
+
 ### 🐧 Cross-platform support
 
 The skill currently assumes macOS (`install.sh`, `~/.config` paths, the `open` command for auto-opening notes in Obsidian). Linux/Windows support PRs are welcome. Touch:

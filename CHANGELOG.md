@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- **Multilingual trigger phrases (Phase 3):** every command now declares `triggers_<lang>:` lines in its frontmatter. English (`triggers_en:`) is populated for all 31 commands; the schema is extensible to any language via `triggers_es:`, `triggers_it:`, `triggers_fr:`, `triggers_de:`, `triggers_pt:`, `triggers_ru:`, `triggers_ja:` (community contributions welcome). The non-Claude dispatchers (`AGENTS.md`, `GEMINI.md`) now include a `## Trigger phrases` section grouped by language then by category, so AI agents on those platforms can match natural-language requests without seeing the slash form. Adapters auto-detect which languages are populated; empty languages do not appear in the output. Documented in `CONTRIBUTING.md` under "Translating trigger phrases (multilingual support)".
 - **Command categorization (Phase 2):** each command in `commands/` now declares a `category:` (vault, thinking, research, meta). Non-Claude dispatcher tables in `AGENTS.md` / `GEMINI.md` are now emitted as four grouped sections instead of one 31-row blob. Adapters use the shared `emit_routing_table_grouped` helper in `adapters/lib.sh`, so the categorization carries through automatically when a new command is added. No breaking changes — Claude Code build is still a byte-exact identity copy.
 - **Multi-platform adapter pattern (Phase 1):** one source, four platforms.
   - `scripts/build.sh` orchestrator + `scripts/lib.sh` utility helpers

@@ -146,6 +146,114 @@ _emit_one_category_section() {
       done
 }
 
+# ── Trigger phrase emission ─────────────────────────────────────────────────
+# Each command can declare triggers per language:
+#   triggers_en: ["save this", "save the conversation"]
+#   triggers_es: ["guardar esto", "guardar la conversación"]
+#
+# emit_trigger_reference <commands_dir> <platform>
+# Prints a "Trigger phrases" section, grouped by language then by category.
+# Only languages that have at least one populated triggers_<lang> line in
+# at least one command will appear in the output.
+emit_trigger_reference() {
+  local src_dir="$1" platform="$2"
+  [[ -d "$src_dir" ]] || return 0
+
+  local langs; langs="$(_detect_languages "$src_dir")"
+  [[ -z "$langs" ]] && return 0
+
+  printf '\n## Trigger phrases\n\n'
+  printf 'When the user says any of the phrases below (or a close paraphrase), follow the matching command file.\n'
+
+  local lang
+  for lang in $langs; do
+    _emit_trigger_lang_block "$src_dir" "$platform" "$lang"
+  done
+}
+
+# Detect which trigger languages are present across all commands.
+# Returns a space-separated list ordered: en first, then alphabetical.
+_detect_languages() {
+  local src_dir="$1"
+  local langs
+  langs="$(grep -h -oE '^triggers_[a-z]{2}:' "$src_dir"/*.md 2>/dev/null \
+           | sed -E 's/^triggers_([a-z]{2}):.*/\1/' \
+           | sort -u)"
+  # Move 'en' to the front if present
+  local out=""
+  if echo "$langs" | grep -qx en; then
+    out="en"
+    langs="$(echo "$langs" | grep -vx en || true)"
+  fi
+  for l in $langs; do
+    out="${out:+$out }$l"
+  done
+  echo "$out"
+}
+
+# Human-readable label for a language code.
+_lang_label() {
+  case "$1" in
+    en) echo "English" ;;
+    es) echo "Español" ;;
+    it) echo "Italiano" ;;
+    fr) echo "Français" ;;
+    de) echo "Deutsch" ;;
+    pt) echo "Português" ;;
+    ru) echo "Русский" ;;
+    ja) echo "日本語" ;;
+    *)  echo "${1^^}" ;;
+  esac
+}
+
+# Emit one language block: bullet list per command grouped by category.
+_emit_trigger_lang_block() {
+  local src_dir="$1" platform="$2" lang="$3"
+  local label; label="$(_lang_label "$lang")"
+  printf '\n### %s (`%s`)\n\n' "$label" "$lang"
+
+  local index; index="$(mktemp)"
+  local f name cat raw triggers
+  for f in "$src_dir"/*.md; do
+    [[ -f "$f" ]] || continue
+    should_include "$f" "$platform" || continue
+    raw="$(parse_frontmatter "$f" "triggers_$lang")"
+    [[ -z "$raw" || "$raw" == "[]" ]] && continue
+    name="$(basename "$f" .md)"
+    cat="$(parse_frontmatter "$f" category)"
+    [[ -z "$cat" ]] && cat="other"
+    # Strip [ ] and collapse quoting differences for display
+    triggers="$(echo "$raw" | sed -E 's/^\[//; s/\]$//')"
+    printf '%s\t%s\t%s\n' "$cat" "$name" "$triggers" >> "$index"
+  done
+
+  local all_cats; all_cats="$(awk -F '\t' '{print $1}' "$index" | sort -u)"
+  local c emitted=""
+  for c in $CATEGORY_ORDER; do
+    if echo "$all_cats" | grep -qx "$c"; then
+      _emit_one_trigger_category "$c" "$index"
+      emitted+=" $c"
+    fi
+  done
+  for c in $all_cats; do
+    case " $emitted " in *" $c "*) continue ;; esac
+    _emit_one_trigger_category "$c" "$index"
+  done
+
+  rm -f "$index"
+}
+
+_emit_one_trigger_category() {
+  local cat="$1" index_file="$2"
+  local title; title="$(_category_title "$cat")"
+  printf '\n**%s**\n\n' "$title"
+  awk -F '\t' -v c="$cat" '$1 == c { print $2 "\t" $3 }' "$index_file" \
+    | sort \
+    | while IFS=$'\t' read -r name triggers; do
+        printf -- '- `/%s` — %s\n' "$name" "$triggers"
+      done
+}
+
 # ── Tool-name neutralization for non-Claude platforms ───────────────────────
 # Rewrites Claude Code tool references to platform-neutral wording so the
 # instructions still make sense in tools that don't have Claude's tool names.

@@ -55,6 +55,7 @@ agent) should follow when the user's request matches its trigger phrase.
 EOF
 
     emit_routing_table_grouped "$src/commands" "$CODEX_PLATFORM" ".codex/commands"
+    emit_trigger_reference     "$src/commands" "$CODEX_PLATFORM"
 
     cat <<'EOF'
 
