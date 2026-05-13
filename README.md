@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/eugeniughelbur/obsidian-second-brain">
-    <img src="media/banner.png" alt="obsidian-second-brain: a Claude Code skill for Obsidian that turns your vault into a living AI-first second brain" width="100%" />
+    <img src="media/banner.png" alt="obsidian-second-brain — one brain, four CLIs, 32 commands. A cross-CLI skill for Obsidian that runs on Claude Code, Codex CLI, Gemini CLI, and OpenCode." width="100%" />
   </a>
 </p>
 
