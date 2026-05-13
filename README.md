@@ -5,14 +5,14 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Claude_Code-555555?style=for-the-badge" alt="Claude Code" />
-  <img src="https://img.shields.io/badge/Codex_CLI-555555?style=for-the-badge" alt="Codex CLI" />
-  <img src="https://img.shields.io/badge/Gemini_CLI-555555?style=for-the-badge" alt="Gemini CLI" />
-  <img src="https://img.shields.io/badge/OpenCode-555555?style=for-the-badge" alt="OpenCode" />
+  <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code" /></a>
+  <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/Codex_CLI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="Codex CLI" /></a>
+  <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/Gemini_CLI-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI" /></a>
+  <a href="#codex-cli--gemini-cli--opencode"><img src="https://img.shields.io/badge/OpenCode-181818?style=for-the-badge&logo=opensourceinitiative&logoColor=white" alt="OpenCode" /></a>
 </p>
 
 <p align="center">
-  <em>One codebase. Four platforms. Same brain.</em>
+  <strong>One codebase. Four CLIs. Same brain.</strong>
 </p>
 
 <p align="center">
@@ -38,8 +38,10 @@
   <br /><br />
   <em>live research from X, the web, and YouTube &middot; 4 scheduled agents &middot; 4 role presets</em>
   <br /><br />
+  <em>write-time AI-first validator &middot; <code>/create-command</code> interview flow &middot; multilingual trigger schema</em>
+  <br /><br />
   <a href="#what-happens-when-you-install-this">See it in action</a> &middot;
-  <a href="#31-commands">All commands</a> &middot;
+  <a href="#32-commands">All commands</a> &middot;
   <a href="#install">Install</a> &middot;
   <a href="#choose-your-preset">Presets</a> &middot;
   <a href="https://github.com/eugeniughelbur/obsidian-second-brain/discussions">Discussions</a>
